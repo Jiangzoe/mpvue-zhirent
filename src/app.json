@@ -3,7 +3,8 @@
     "pages/salon/main",
     "pages/sponsor/main",
     "pages/mine/main",
-    "pages/salonInfo/main"
+    "pages/salonInfo/main",
+    "pages/sponsorInfo/main"
    ],
   "window": {
     "backgroundTextStyle": "light",

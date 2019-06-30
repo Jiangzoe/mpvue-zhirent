@@ -55,7 +55,8 @@ Vue.prototype.getList = function (){
       .then((res) => {
         if (res.data.errno === 0) {
           this.active = res.data.data.active;
-          console.log(this.active)
+          this.sponsors = res.data.data.sponsors
+          console.log(this.sponsors)
           wx.hideLoading()
         }
       })
