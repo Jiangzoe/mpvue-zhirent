@@ -49,13 +49,35 @@
         <p class="info-item">活动详情</p>
         <Expander v-bind:info="salonInfo" v-on:clickExpander="showDesc"></Expander>
       </div>
-      
+      <Guest v-bind:guest="guests"></Guest>
+      <Sponsor v-bind:sponsor="sponsors"></Sponsor>
+      <Photo v-bind:photo="photos"></Photo>
+      <Essay v-bind:article="articles"></Essay>
     </div>
+    <div class="footer">
+      <div class="footer-item">
+        <div>
+          <image class="footer-icon" src="/static/images/share.svg"></image>
+        </div>
+        <div class="item-name">分享</div>
+      </div>
+      <div class="footer-item" @click="like">
+        <image class="footer-icon" :src="isLike?'/static/images/like.svg':'/static/images/unlike.svg'" ></image>
+        <text class="item-name">感兴趣</text>
+      </div>
+      <div class="footer-item">
+        <button class="join">报名</button>
+      </div>
+      </div>
   </div>
 </template>
 
 <script>
 import Expander from '@/components/expander/expander'
+import Guest from '@/components/guest/guest'
+import Sponsor from '@/components/sponsor/sponsor'
+import Photo from '@/components/photo/photo'
+import Essay from '@/components/essay/essay'
 export default {
   data(){
     return{
@@ -64,10 +86,16 @@ export default {
       interestInfo:[],
       ellipsis:true,
       salonInfo:'',
+      guests:[],
+      photos:{},
     }
   },
   components:{
-    Expander
+    Expander,
+    Guest,
+    Sponsor,
+    Photo,
+    Essay
   },
   onLoad(options) {
     let i = options.index;
@@ -83,6 +111,10 @@ export default {
         this.joinInfo = this.salon.joinInfo
         this.interestInfo = this.salon.interestInfo
         this.salonInfo = this.salon.salonDesc
+        this.guests = this.salon.guests
+        this.sponsors =this.salon.sponsors
+        this.photos = this.salon.photos
+        this.articles = this.salon.articles
         wx.hideLoading()
       });
   },
@@ -155,4 +187,35 @@ export default {
         color #43457a
         font-size 16px
         margin-bottom 10px
+
+.footer
+  width 100%
+  height 70px
+  background-color #fff
+  border-top 1px solid #eaebed
+  position fixed
+  bottom 0
+  display flex
+  .footer-item
+    display flex
+    margin-top 10px
+    margin-bottom 10px
+    .footer-icon
+      width 25px
+      height 25px
+      margin-top 10px
+      margin-left 40px
+      margin-right 8px
+    .item-name
+      font-size 16px
+      line-height 50px
+      font-weight bold
+    .join
+      width 115px
+      height 40px
+      background-color #224fa4
+      color #fff
+      margin-left 20px
+      text-align center
+      line-height 40px
 </style>
