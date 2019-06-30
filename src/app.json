@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/salon/main",
+    "pages/sponsor/main",
+    "pages/mine/main",
+    "pages/salonInfo/main"
+   ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#224fa4",
+    "navigationBarTitleText": "职人",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999",
+    "backgroundColor": "#fff",
+    "selectedColor": "#0c53ab",
+    "borderStyle": "black",
+
+    "list": [{
+      "text": "沙龙",
+      "pagePath": "pages/salon/main",
+      "iconPath": "static/tabs/car1.png",
+      "selectedIconPath": "static/tabs/car.png"
+    }, {
+      "text": "主办方",
+      "pagePath": "pages/sponsor/main",
+      "iconPath": "static/tabs/home1.png",
+      "selectedIconPath": "static/tabs/home.png"
+    }, {
+      "text": "我的",
+      "pagePath": "pages/mine/main",
+      "iconPath": "static/tabs/mine1.png",
+      "selectedIconPath": "static/tabs/mine.png"
+    }
+  ],
+    "position": "bottom"
+  }
+}

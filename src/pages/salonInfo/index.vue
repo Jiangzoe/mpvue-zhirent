@@ -1,0 +1,158 @@
+<template>
+  <div class="salon-desc">
+    <image class="header-img" :src="salon.theme"/>
+    <div class="desc-container">
+      <div class="card-container">
+        <div class="card-info">
+          <div class="card-title">{{salon.title}}</div>
+          <div class="card-item">
+            <image class="item-icon" src="/static/images/time.svg" />
+            <text class="item-desc">{{salon.startTime}} 至 {{salon.endTime}}</text>
+          </div>
+          <div class="card-item">
+            <image class="item-icon" src="/static/images/deadline.svg" />
+            <text class="item-desc">{{salon.deadline}}</text>
+          </div>
+          <div class="card-item">
+            <image class="item-icon" src="/static/images/address.svg"/>
+            <text class="item-desc">{{salon.address}}</text>
+          </div>
+          <div class="card-item">
+            <image class="item-icon" src="/static/images/people.svg"/>
+            <text class="item-desc">{{salon.people}}人</text>
+          </div>
+          <div class="card-item">
+            <image class="item-icon" src="/static/images/prices.svg"/>
+            <text class="item-desc">{{salon.prices}}</text>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="footer-item"> 
+            <div class="footer-avatar">
+              <image class="item-avatar" :src="joinInfo[0].avatar"></image>
+              <image class="item-avatar" :src="joinInfo[1].avatar"></image>
+              <image class="item-avatar" :src="joinInfo[2].avatar"></image>
+            </div>
+            <div class="join-desc">{{salon.joinNum}}人报名</div>
+          </div>
+          <div class="footer-item">
+            <div class="footer-avatar">
+              <image class="item-avatar" :src="interestInfo[0].avatar"></image>
+              <image class="item-avatar" :src="interestInfo[1].avatar"></image>
+              <image class="item-avatar" :src="interestInfo[2].avatar"></image>
+            </div>
+            <div class="join-desc">{{salon.interestNum}}人感兴趣</div>
+          </div>
+        </div>
+      </div>
+      <div class="salon-info">
+        <p class="info-item">活动详情</p>
+        <Expander v-bind:info="salonInfo" v-on:clickExpander="showDesc"></Expander>
+      </div>
+      
+    </div>
+  </div>
+</template>
+
+<script>
+import Expander from '@/components/expander/expander'
+export default {
+  data(){
+    return{
+      salon:{},
+      joinInfo:[],
+      interestInfo:[],
+      ellipsis:true,
+      salonInfo:'',
+    }
+  },
+  components:{
+    Expander
+  },
+  onLoad(options) {
+    let i = options.index;
+    wx.showLoading({
+      title:'加载中'
+    }),
+    this.$http
+      .get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
+      .then((res) => {
+        console.log(res)
+        this.salon = res.data.data.active[i];
+        console.log(this.salon)
+        this.joinInfo = this.salon.joinInfo
+        this.interestInfo = this.salon.interestInfo
+        this.salonInfo = this.salon.salonDesc
+        wx.hideLoading()
+      });
+  },
+  methods: {
+     showDesc(){
+
+    }
+  },
+}
+</script>
+
+<style lang="stylus" scoped>
+.salon-desc
+  width 100%
+  height 100%
+  background-color #f4f6f8
+  .header-img
+    height 190px
+    width 100%
+  .desc-container
+    padding 0 15px
+    margin-bottom 80px
+    .card-container
+      position relative
+      top -10px
+      border 1px solid #eaebed
+      border-radius 5px
+      width 350px
+      box-sizing border-box
+      padding 20px 15px 10px
+      background-color #fefefe
+      opacity 0.9
+      .card-info
+        border-bottom 1px dashed #eaebed
+        .card-title
+          font-size 16px
+          font-weight bold
+          margin-bottom 20px
+        .card-item
+          margin-bottom 15px
+          .item-icon
+            width 20px
+            height 20px
+            margin-right 10px
+          .item-desc 
+            font-size 14px
+            height 20px
+      .card-footer 
+        display flex
+        .footer-item
+          display flex 
+          flex 1
+          margin-top 20px
+          .footer-avatar
+            margin-right 5px
+            &first-child
+              margin-left 0
+            .item-avatar
+              margin-left -5px
+              width 25px
+              height 25px
+              border-radius 50%
+          .join-desc 
+            font-size 14px
+            line-height 25px
+            color #3260ac
+    .salon-info
+      margin-bottom 30px
+      .info-item
+        color #43457a
+        font-size 16px
+        margin-bottom 10px
+</style>

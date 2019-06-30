@@ -1,0 +1,125 @@
+<template>
+  <div class="salons">
+    <div v-for="(item,index) in active" :key="index" @click="toSalonInfo(index)">
+      <div class="card-container">
+        <div class="card-title">{{item.title}}</div>
+        <div class="card-content">
+          <div class="card-img">
+            <image :src="item.theme" class="theme-img"></image>
+          </div>
+          <div class="card-info">
+            <div class="card-item">
+              <div class="item-icon">
+                <image :src="item.sponsorIcon" class="sponsor-icon"></image>
+              </div>
+              <div class="item-info sponsor-name">{{item.sponsorName}}</div>
+            </div>
+            <div class="card-item">
+              <div class="item-icon">
+                <image class="info-icon" src="/static/images/time.svg"></image>
+              </div>
+              <div class="item-info">{{item.startTime}}</div>
+            </div>
+            <div class="card-item">
+              <div class="item-icon">
+                <image class="info-icon" src="/static/images/address.svg"></image>
+              </div>
+              <div class="item-info">{{item.address}}</div>
+            </div>
+            <div class="card-item">
+              <div class="item-icon">
+                <image class="info-icon" src="/static/images/prices.svg"></image>
+              </div>
+              <div class="item-info">{{item.prices}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <Popularity v-bind:popularity="item"></Popularity>
+          <button class="status">报名</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Popularity from "@/components/popularity/popularity"
+export default {
+  data() {
+    return {
+      active:[],
+      basicInfo:{}
+    }
+  },
+  components:{
+     Popularity
+  },
+  onLoad(){
+    this.getList();
+  },
+  methods: {
+    toSalonInfo(index) {
+      const url = `/pages/salonInfo/main?index=${index}`;
+      wx.navigateTo({
+        url
+      });
+    }
+  },
+}
+</script>
+
+<style lang="stylus" scoped>
+.salons
+  width 100%
+  height 100%
+  background-color #f4f6f8
+  .card-container 
+    padding 15px
+    background-color #fff
+    margin-bottom 10px
+    .card-title 
+      font-weight bold
+      font-size 18px
+      margin-bottom 10px
+    .card-content 
+      display flex
+      margin-bottom 20px
+      .card-img 
+        margin-right 10px
+        .theme-img 
+          width 160px
+          height 110px
+      .card-info 
+        .card-item 
+          display flex
+          margin-bottom 4px
+          .item-icon, .item-no 
+            margin-right 10px
+            .sponsor-icon 
+              width 25px
+              height 25px
+              border-radius 50%       
+            .info-icon 
+              width 20px
+              height 20px
+          .item-info 
+            font-size 14px
+            width 140px
+            overflow hidden
+            text-overflow ellipsis
+            white-space nowrap
+            color #2c2c2c       
+          .sponsor-name 
+            line-height 25px
+    .card-footer 
+      display flex
+      .status 
+        width 90px
+        height 40px
+        position absolute
+        right 15px
+        background-color #224fa4
+        color #fff
+        font-size 16px 
+</style>
