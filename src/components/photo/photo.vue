@@ -2,11 +2,19 @@
   <div class="salon-info">
     <p class="info-item">现场照片</p>
     <div class="photo-container" v-if="photo.photoNum>0">
-      <scroll-view scroll-x="true">
-        <div class="swipper-item"  v-for="(item,index) in photo.photoInfo" :key="index">
-          <image class="salon-photo" :src="item"></image>
-        </div>
-      </scroll-view>
+      <swiper :current="cur" next-margin="40px" @change="onSlideChangeEnd">
+       <block  v-for="(item,index) in photo.photoInfo" :key="index">
+         <swiper-item>
+           <img class="salon-photo" :src="item" @click="previewImage(index)"/>
+         </swiper-item>
+       </block>
+       <swiper-item class="grey">
+           <div class="all">
+             <div class="tips">全部照片</div>
+             <div class="tips">{{photo.photoNum}}张</div>
+           </div>
+         </swiper-item>
+      </swiper>
     </div>
     <div v-else class="desc-container">
       <div class="no-photo">
@@ -20,10 +28,23 @@
 export default {
   data() {
     return {
-      
+      cur:0
     }
   },
-  props:['photo']
+  props:['photo'],
+  methods: {
+    onSlideChangeEnd(e){
+      this.cur = e.target.current
+    },
+    previewImage(index){
+      var imgList = this.photo.photoInfo
+      this.cur = index
+      wx.previewImage({
+      current:this.photo.photoInfo[index],
+      urls:imgList
+      })
+    }
+  },
 }
 </script>
 
@@ -36,16 +57,23 @@ export default {
     margin-bottom 10px
   .photo-container
     height 160px
-    display flex
-    white-space nowrap
-    .swipper-item
+    .salon-photo
       width 295px
-      margin-left 10px
-      height 100%
-      display inline-block
-      .salon-photo
-        max-height 100%
-        max-width 100%
+      height 160px
+    .grey
+      width 120px
+      height 160px
+      .all
+        width 120px
+        height 160px
+        background-color #e0e4e7
+        text-align center
+        box-sizing border-box
+        padding-top 50px
+        .tips
+          margin-bottom 10px
+          font-size 14px
+
   .desc-container
     margin-top 10px
     margin-bottom 0
