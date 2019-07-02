@@ -4,25 +4,30 @@
       <image class="sponsor-icon" :src="sponsor.avatar"></image>
       <div class="sponsor-name">{{sponsor.name}}</div>
       <Expander :info="sponsorInfo" :clickExpander="showDesc"></Expander>
-      <button class="like">关注</button>
+     <button :class="sponsor.collected ? 'like' : 'unlike'">{{sponsor.collected ? '已关注' : '关注'}}</button>
     </div>
     <div class="salon-num">主办{{sponsor.salonNum}}场沙龙</div>
-    <div class="card-container" v-for="(item,index) in salons" :key="index">
-      <!-- <Card v-bind:item="salons[index]" v-bind:father="salons[index]"></Card> -->
+    <div v-if="sponsor.salonNum>0">
+      <div class="card-container" v-for="(item,index) in salonList" :key="index">
+        <Salon v-bind:list="item" v-bind:father="item"></Salon>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Expander from '@/components/expander/expander'
+import Salon from '@/components/salon/salon'
 export default {
   data() {
     return {
-      sponsor:{}
+      sponsor:{},
+      salonList:[]
     }
   },
   components:{
-    Expander
+    Expander,
+    Salon
   },
   onLoad(options){
      let i = options.index;
@@ -32,9 +37,23 @@ export default {
     this.$http
       .get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
       .then((res) => {
+        let salonsInfos = res.data.data.active
+        // 整条数据
         this.sponsor = res.data.data.sponsors[i];
-        console.log(this.sponsor)
+        // 主办方详情
         this.sponsorInfo = this.sponsor.info
+        
+        // 拿到详细的活动详情
+        if(this.sponsor.salonNum>0){
+          this.salonList = this.sponsor.salons.map(item=>{
+            let sal
+            salonsInfos.forEach(salon => {
+              if(salon.title === item.title) sal = salon
+            })
+            return sal
+          })
+        }
+        console.log(this.salonList)
          wx.hideLoading()
       }).catch((e) => {
         console.log(e)
@@ -63,14 +82,19 @@ export default {
       font-size 16px
       font-weight bold
       margin-bottom 10px
-    .like
+    .like,.unlike
       width 80px
       height 40px
       margin-top 10px
-      background-color #224fa4
       font-size 16px
       line-height 40px
+      border 1px solid #224fa4
+    .unlike
       color #fff
+      background-color #224fa4
+    .like
+      color #224fa4
+      background-color #fff
   .salon-num
     color #3f4177
     font-size 16px
@@ -78,6 +102,10 @@ export default {
     margin-bottom 20px
     margin-left 15px
     font-weight bold
+
+
+
+
   .card-container
     background-color #fff
     box-sizing border-box

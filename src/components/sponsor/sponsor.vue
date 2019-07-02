@@ -1,16 +1,16 @@
 <template>
   <div class="salon-info">
     <p class="info-item">{{sponsor.sponsorsNum}}个主办方</p>
-    <!-- <div class="sponsor-container"  v-for="(item,index) in salon.sponsors" :key="index">
+    <div class="sponsor-container"  v-for="(item,index) in list" :key="index">
     <div class="sponsor-card">
-      <image class="sponsor-icon" :src="item.sponsorIcon"></image>
+      <image class="sponsor-icon" :src="item.avatar"></image>
       <div class="sponsor-info">
-        <p class="sponsor-item">{{item.sponsorName}}</p>
+        <p class="sponsor-item">{{item.name}}</p>
         <p class="sponsor-item">共举办{{item.salonNum}}场沙龙</p>
       </div>
       <image class="right" src="/static/images/right.svg"></image>
     </div> 
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
       
     }
   },
-  props:['sponsor']
+  props:['sponsor','list']
 
 }
 </script>

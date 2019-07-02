@@ -50,8 +50,8 @@
         <Expander v-bind:info="salonInfo" v-on:clickExpander="showDesc"></Expander>
       </div>
       <Guest v-bind:guest="guests"></Guest>
-      <Sponsor v-bind:sponsor="sponsors"></Sponsor>
-      <Photo v-bind:photo="photos"></Photo>
+      <Sponsor v-bind:sponsor="sponsors" :list="sponsorList"></Sponsor>
+      <Photo v-bind:photo="photos" :allPhotos="showPhotos" :imgList="photos.photoInfo"></Photo>
       <Essay v-bind:article="articles"></Essay>
     </div>
     <div class="footer">
@@ -88,6 +88,7 @@ export default {
       salonInfo:'',
       guests:[],
       photos:{},
+      sponsorList:[]
     }
   },
   components:{
@@ -105,22 +106,42 @@ export default {
     this.$http
       .get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
       .then((res) => {
-        console.log(res)
+        let sponsorsInfos = res.data.data.sponsors;
+        // 整条数据
         this.salon = res.data.data.active[i];
-        console.log(this.salon)
+        // 参加详情
         this.joinInfo = this.salon.joinInfo
+        // 感兴趣详情
         this.interestInfo = this.salon.interestInfo
+        // 活动详情
         this.salonInfo = this.salon.salonDesc
+        // 嘉宾
         this.guests = this.salon.guests
+        // 主办方
         this.sponsors =this.salon.sponsors
+        // 照片
         this.photos = this.salon.photos
+        // 文章
         this.articles = this.salon.articles
+        
+        // 拿到详细的主办方信息
+        this.sponsorList = this.sponsors.sponsorsInfo.map(item=>{
+          let spon;
+          sponsorsInfos.forEach(sponsor=>{
+            if(sponsor.name === item.name) spon = sponsor
+          })
+           return spon;
+        })
+        console.log(this.sponsorList);
+        
         wx.hideLoading()
       });
   },
   methods: {
-     showDesc(){
-
+    showDesc(){
+    },
+    showPhotos(){
+      
     }
   },
 }

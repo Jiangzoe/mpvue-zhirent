@@ -1,7 +1,7 @@
 <template>
   <div class="sponsor">
     <ul>
-      <li v-for="(item,index) in sponsors" :key="index" @click="toSponsorInfo(index)">
+      <li v-for="(item,index) in sponsors" :key="index"  @click="toSponsorInfo(index)">
          <div class="card-container">
             <div class="card-content">
               <div class="card-icon">
@@ -11,7 +11,7 @@
                 <div class="card-title">{{item.name}}</div>
                 <div class="card-desc">{{item.info}}</div>
               </div>
-              <button class="like">关注</button>
+              <button @click="collect(index)" :class="item.collected ? 'like' : 'unlike'">{{item.collected ? '已关注' : '关注'}}</button>
             </div>
             <div class="card-footer">
               <div class="card-salon-num">共举办{{item.salonNum}}场沙龙</div>
@@ -39,8 +39,29 @@ export default {
       wx.navigateTo({
         url
       });
-    }
+    },
+    collect(index){
+      for (let i = 0; i < this.sponsors.length; i++) {
+        if (i === index) {
+          this.sponsors[i].collected = !this.sponsors[i].collected
+          let title = this.sponsors[i].collected ? '关注成功' : '取消成功'
+          wx.showToast({
+            title
+          })
+          let oldStorage = wx.getStorageSync('isCollected')
+          // 初始化
+          oldStorage = {}
+          oldStorage[i] = this.sponsors[i].collected
+          // 将本次设置的结果再缓存到本地
+          wx.setStorage({
+            key:'isCollect',
+            data:oldStorage
+          })
+        }
+      }
+  }
   },
+  
 }
 </script>
 
@@ -75,15 +96,21 @@ export default {
           overflow hidden
           text-overflow:ellipsis;
           white-space: nowrap;
-      .like
+      .like,.unlike
         width 80px
         height 40px
-        background-color #224fa4
-        color #fff
         line-height 40px
+        font-size 16px
         margin-top 5px
         position absolute
         right 15px
+        border 1px solid #224fa4
+      .unlike
+        background-color #224fa4
+        color #fff
+      .like
+        background-color #fff
+        color #224fa4
     .card-footer
       .card-salon-num,.card-recently
         margin-top 5px

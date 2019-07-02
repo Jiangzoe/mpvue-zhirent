@@ -18,9 +18,7 @@ export default {
     return {
     }
   },
-  props:{
-    popularity:Object
-  }
+  props:['popularity']
 };
 </script>
 

@@ -8,12 +8,6 @@
            <img class="salon-photo" :src="item" @click="previewImage(index)"/>
          </swiper-item>
        </block>
-       <swiper-item class="grey">
-           <div class="all">
-             <div class="tips">全部照片</div>
-             <div class="tips">{{photo.photoNum}}张</div>
-           </div>
-         </swiper-item>
       </swiper>
     </div>
     <div v-else class="desc-container">
@@ -28,20 +22,20 @@
 export default {
   data() {
     return {
-      cur:0
+      cur:0,
+      imgList:[]
     }
   },
-  props:['photo'],
+  props:['photo','imgList'],
   methods: {
     onSlideChangeEnd(e){
       this.cur = e.target.current
     },
     previewImage(index){
-      var imgList = this.photo.photoInfo
       this.cur = index
       wx.previewImage({
       current:this.photo.photoInfo[index],
-      urls:imgList
+      urls:this.imgList
       })
     }
   },
