@@ -27,11 +27,13 @@
 export default {
   data() {
     return {
-      sponsors:[]
+      sponsors:[],
+      collectList:[]
     }
   },
   onLoad(){
     this.getList()
+    // 
   },
   methods: {
     toSponsorInfo(index){
@@ -48,15 +50,8 @@ export default {
           wx.showToast({
             title
           })
-          let oldStorage = wx.getStorageSync('isCollected')
-          // 初始化
-          oldStorage = {}
-          oldStorage[i] = this.sponsors[i].collected
-          // 将本次设置的结果再缓存到本地
-          wx.setStorage({
-            key:'isCollect',
-            data:oldStorage
-          })
+          var getId = index
+         
         }
       }
   }
