@@ -18,6 +18,7 @@
 <script>
 import Expander from '@/components/expander/expander'
 import Salon from '@/components/salon/salon'
+
 export default {
   data() {
     return {
@@ -53,7 +54,7 @@ export default {
             return sal
           })
         }
-        console.log(this.salonList)
+        // console.log(this.salonList)
          wx.hideLoading()
       }).catch((e) => {
         console.log(e)

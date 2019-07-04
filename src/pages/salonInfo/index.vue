@@ -55,7 +55,7 @@
       <Essay v-bind:article="articles"></Essay>
     </div>
     <div class="footer">
-      <div class="footer-item">
+      <div @click="goShare" class="footer-item">
         <div>
           <image class="footer-icon" src="/static/images/share.svg"></image>
         </div>
@@ -66,9 +66,11 @@
         <text class="item-name">感兴趣</text>
       </div>
       <div class="footer-item">
-        <button class="join">报名</button>
+        <div class="join">已结束</div>
       </div>
-      </div>
+    </div>
+    <Share v-if="isShare"  @cancel="cancelShare"></Share>
+    <div :class="isShare ? 'mask' : ''"></div>
   </div>
 </template>
 
@@ -78,6 +80,7 @@ import Guest from '@/components/guest/guest'
 import Sponsor from '@/components/sponsor/sponsor'
 import Photo from '@/components/photo/photo'
 import Essay from '@/components/essay/essay'
+import Share from '@/components/share/share'
 export default {
   data(){
     return{
@@ -88,7 +91,8 @@ export default {
       salonInfo:'',
       guests:[],
       photos:{},
-      sponsorList:[]
+      sponsorList:[],
+      isShare:false
     }
   },
   components:{
@@ -96,7 +100,8 @@ export default {
     Guest,
     Sponsor,
     Photo,
-    Essay
+    Essay,
+    Share
   },
   onLoad(options) {
     let i = options.index;
@@ -141,13 +146,23 @@ export default {
     showDesc(){
     },
     showPhotos(){
-      
+    },
+    goShare(){
+      this.isShare = !this.isShare
+    },
+    cancelShare(msg){
+      this.isShare = msg
     }
   },
 }
 </script>
 
 <style lang="stylus" scoped>
+.mask
+  background-color #000
+  opacity 0.9
+
+
 .salon-desc
   width 100%
   height 100%
@@ -234,9 +249,21 @@ export default {
     .join
       width 115px
       height 40px
-      background-color #224fa4
-      color #fff
+      font-size 16px
+      background-color #f2f2f3
+      color #a0a49f
+      margin-top 2px
       margin-left 20px
       text-align center
       line-height 40px
+
+.mask
+  height 100vh
+  width 100vh
+  position fixed
+  top 0
+  left 0
+  background-color #000
+  opacity 0.7
+  z-index 20
 </style>

@@ -36,7 +36,7 @@
         </div>
         <div class="card-footer">
           <Popularity v-bind:popularity="item"></Popularity>
-          <button class="status">报名</button>
+          <div class="status">已结束</div>
         </div>
       </div>
     </div>
@@ -116,10 +116,11 @@ export default {
       display flex
       .status 
         width 90px
-        height 40px
+        height 30px
+        line-height 30px
         position absolute
-        right 15px
-        background-color #224fa4
-        color #fff
+        right 0
+        background-color #fff
+        color #9a9e99
         font-size 16px 
 </style>

@@ -11,7 +11,7 @@
                 <div class="card-title">{{item.name}}</div>
                 <div class="card-desc">{{item.info}}</div>
               </div>
-              <button @click="collect(index)" :class="item.collected ? 'like' : 'unlike'">{{item.collected ? '已关注' : '关注'}}</button>
+              <button @click="collect(index)" :class="collectList[index] ? 'like' : 'unlike'">{{item.collected ? '已关注' : '关注'}}</button>
             </div>
             <div class="card-footer">
               <div class="card-salon-num">共举办{{item.salonNum}}场沙龙</div>
@@ -33,7 +33,6 @@ export default {
   },
   onLoad(){
     this.getList()
-    // 
   },
   methods: {
     toSponsorInfo(index){
@@ -43,17 +42,6 @@ export default {
       });
     },
     collect(index){
-      for (let i = 0; i < this.sponsors.length; i++) {
-        if (i === index) {
-          this.sponsors[i].collected = !this.sponsors[i].collected
-          let title = this.sponsors[i].collected ? '关注成功' : '取消成功'
-          wx.showToast({
-            title
-          })
-          var getId = index
-         
-        }
-      }
   }
   },
   

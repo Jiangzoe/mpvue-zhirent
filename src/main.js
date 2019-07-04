@@ -57,6 +57,7 @@ Vue.prototype.getList = function (){
           this.active = res.data.data.active;
           this.sponsors = res.data.data.sponsors
           wx.hideLoading()
+          
         }
       })
 }
