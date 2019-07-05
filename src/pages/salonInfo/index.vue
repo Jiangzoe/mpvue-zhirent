@@ -84,16 +84,16 @@ import Share from '@/components/share/share'
 export default {
   data(){
     return{
+      index:'',
       salon:{},
       joinInfo:[],
       interestInfo:[],
-      ellipsis:true,
       salonInfo:'',
       guests:[],
       photos:{},
       sponsorList:[],
       isShare:false,
-      isInterested:true
+      isInterested:''
     }
   },
   components:{
@@ -106,6 +106,7 @@ export default {
   },
   onLoad(options) {
     let i = options.index;
+    this.index = i
     wx.showLoading({
       title:'加载中'
     }),
@@ -142,15 +143,27 @@ export default {
         wx.hideLoading()
       });
   },
+  onShow(){
+    var cache = wx.getStorageSync('interestList')
+    this.isInterested = cache[this.index]
+  },
   methods: {
     interest(){
       wx.showLoading({
         title:'加载中'
       })
+      var cache = wx.getStorageSync('interestList')
+      var currentCache = cache[this.index]
+      currentCache = !currentCache
+      cache[this.index] = currentCache
+      wx.setStorage({
+        key:'interestList',
+        data:cache
+      })
+      this.isInterested = cache[this.index]
       setTimeout(function () {
         wx.hideLoading()
       }, 1000)
-      
     },
     goShare(){
       this.isShare = !this.isShare

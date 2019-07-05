@@ -49,7 +49,8 @@ export default {
   data() {
     return {
       active:[],
-      basicInfo:{}
+      basicInfo:{},
+      interestList:[]
     }
   },
   components:{
@@ -57,6 +58,17 @@ export default {
   },
   onLoad(){
     this.getList();
+  },
+  onShow(){
+    var cache = wx.getStorageSync('interestList')
+    if(!cache){
+      wx.setStorage({
+        key:"interestList",
+        data:this.interestList
+      })
+    }else{
+      this.interestList = cache
+    }
   },
   methods: {
     toSalonInfo(index) {

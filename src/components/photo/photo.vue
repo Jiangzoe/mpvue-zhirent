@@ -22,8 +22,7 @@
 export default {
   data() {
     return {
-      cur:0,
-      imgList:[]
+      cur:0
     }
   },
   props:['photo','imgList'],

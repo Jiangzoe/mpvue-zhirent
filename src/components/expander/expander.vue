@@ -12,7 +12,6 @@
 export default {
   data() {
     return {
-      info:'',
       isEllipsis:true
     }
   },
@@ -35,6 +34,7 @@ export default {
   text-overflow ellipsis
   overflow hidden
   line-height 26px
+  text-align left
 .ellipsis
   -webkit-line-clamp 3
 .unellipsis
@@ -42,7 +42,7 @@ export default {
 .text-expander
   margin 0 auto
   width 80px
-  height 20px 
+  height 20px
   .text-expander__content
     color #c4c8c7
     font-size 16px

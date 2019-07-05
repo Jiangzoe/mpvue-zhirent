@@ -20,7 +20,6 @@ import Popularity from '@/components/popularity/popularity';
 export default {
   data() {
     return {
-      list:[]
     }
   },
   components:{

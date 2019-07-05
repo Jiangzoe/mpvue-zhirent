@@ -51,24 +51,14 @@ Vue.prototype.getList = function (){
     title:'加载中'
   }),
   this.$http
-      .get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
-      .then((res) => {
-        if (res.data.errno === 0) {
-          this.active = res.data.data.active;
-          this.sponsors = res.data.data.sponsors
-          wx.hideLoading() 
-
-         // 获取默认的主办方收藏列表
-         for(let i = 0 ; i< this.sponsors.length;i++){
-          this.collectList.push(false)
-        }
-
-          // 获取默认的活动收藏列表
-          for(let i = 0 ;i < this.active.length; i++){
-            this.interestList.push(false)
-          }
-        }
-      })
+    .get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
+    .then((res) => {
+      if (res.data.errno === 0) {
+        this.active = res.data.data.active;
+        this.sponsors = res.data.data.sponsors
+      }
+    })
+    wx.hideLoading()
 }
 
 Vue.config.productionTip = false
