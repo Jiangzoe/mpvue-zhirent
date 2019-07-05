@@ -4,7 +4,7 @@
       <image class="sponsor-icon" :src="sponsor.avatar"></image>
       <div class="sponsor-name">{{sponsor.name}}</div>
       <Expander :info="sponsorInfo" ></Expander>
-     <button :class="sponsor.collected ? 'like' : 'unlike'">{{sponsor.collected ? '已关注' : '关注'}}</button>
+     <button @click="collect" :class="isCollected ? 'like' : 'unlike'">{{isCollected ? '已关注' : '关注'}}</button>
     </div>
     <div class="salon-num">主办{{sponsor.salonNum}}场沙龙</div>
     <div v-if="sponsor.salonNum>0">
@@ -23,7 +23,9 @@ export default {
   data() {
     return {
       sponsor:{},
-      salonList:[]
+      salonList:[],
+      index:'',
+      isCollected:''
     }
   },
   components:{
@@ -32,6 +34,7 @@ export default {
   },
   onLoad(options){
      let i = options.index;
+     this.index = i
      wx.showLoading({
       title:'加载中'
     }),
@@ -43,7 +46,7 @@ export default {
         this.sponsor = res.data.data.sponsors[i];
         // 主办方详情
         this.sponsorInfo = this.sponsor.info
-        
+
         // 拿到详细的活动详情
         if(this.sponsor.salonNum>0){
           this.salonList = this.sponsor.salons.map(item=>{
@@ -54,14 +57,27 @@ export default {
             return sal
           })
         }
-        // 拿到缓存区的收藏信息
-        this.isCollected = wx.
-        // console.log(this.salonList)
          wx.hideLoading()
-      }).catch((e) => {
-        console.log(e)
       });
-  }
+  },
+  onShow(){
+    // 拿到缓存区的收藏信息
+    var cache = wx.getStorageSync('collectList')
+    this.isCollected = cache[this.index]
+  },
+  methods: {
+    collect(){
+      var cache = wx.getStorageSync('collectList')
+      var currentCache = cache[this.index]
+      currentCache = !currentCache
+      cache[this.index] = currentCache
+      wx.setStorage({
+        key:'collectList',
+        data:cache
+      })
+      this.isCollected = cache[this.index]
+    }
+  },
 }
 </script>
 

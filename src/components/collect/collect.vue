@@ -1,6 +1,6 @@
 <template>
-  <div class="sponsor">
-    <div v-for="(item,index) in sponsors" :key="index"  @click="toSponsorInfo(index)">
+<div class="collect-container">
+  <div v-for="(item,index) in sponsors" :key="index"  @click="toSponsorInfo(index)">
       <div class="card-container">
         <div class="card-content">
           <div class="card-icon">
@@ -10,11 +10,10 @@
             <div class="card-title">{{item.name}}</div>
             <div class="card-desc">{{item.info}}</div>
           </div>
-          <button @click.stop="collect(index)" :class="collectList[index] ? 'like' : 'unlike'">{{collectList[index] ? '已关注' : '关注'}}</button>
+          <!-- <button @click.stop="collect(index)" :class="collectList[index] ? 'like' : 'unlike'">{{collectList[index] ? '已关注' : '关注'}}</button> -->
         </div>
         <div class="card-footer">
           <div class="card-salon-num">共举办{{item.salonNum}}场沙龙</div>
-          <div v-if="item.salonNum>0" class="card-recently">最近沙龙：{{item.salons[0].title}}</div>
         </div>
       </div>
     </div>
@@ -25,61 +24,10 @@
 export default {
   data() {
     return {
-      sponsors:[],
-      collectList:[]
+      
     }
   },
-  onLoad(){
-    this.getList()
-  },
-  onShow(){
-    var cache = wx.getStorageSync('collectList')
-    if(!cache){
-      wx.setStorage({
-        key:"collectList",
-        data:this.collectList
-      })
-    }else{
-      this.collectList = cache
-    }
-  },
-  methods: {
-    toSponsorInfo(index){
-       const url = `/pages/sponsorInfo/main?index=${index}`
-      wx.navigateTo({
-        url
-      });
-    },
-    collect(index){
-      var cache = wx.getStorageSync('collectList')
-      var currentCache = cache[index]
-      if(!currentCache){
-        currentCache = true
-      }else{
-        wx.showActionSheet({
-        itemList: ['取消关注'],
-        success (res) {
-          currentCache = false
-          console.log(res.tapIndex)
-          // return currentCache
-          // wx.showLoading({
-          //   title: '加载中',
-          // })
-          // setTimeout(function () {
-          //   wx.hideLoading()
-          // }, 2000)
-        }
-      })
-      }
-      cache[index] = currentCache
-      wx.setStorage({
-        key:'collectList',
-        data:cache
-      })
-      this.collectList = cache
-    }
-  },
-  
+  props:['sponsors']
 }
 </script>
 
@@ -130,7 +78,7 @@ export default {
         background-color #fff
         color #224fa4
     .card-footer
-      .card-salon-num,.card-recently
+      .card-salon-num
         margin-top 5px
         font-size 14px
         color #b6b9b5

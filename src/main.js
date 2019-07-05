@@ -58,18 +58,14 @@ Vue.prototype.getList = function (){
           this.sponsors = res.data.data.sponsors
           wx.hideLoading() 
 
-          // 获取默认的主办方收藏列表
-          for(let i = 0 ; i< this.sponsors.length;i++){
-            this.collectList.push(false)
-          }
-          var cache = wx.getStorageSync('collectList')
-          if(!cache){
-            wx.setStorage({
-              key:"collectList",
-              data:this.collectList
-            })
-          }else{
-            this.collectList = cache
+         // 获取默认的主办方收藏列表
+         for(let i = 0 ; i< this.sponsors.length;i++){
+          this.collectList.push(false)
+        }
+
+          // 获取默认的活动收藏列表
+          for(let i = 0 ;i < this.active.length; i++){
+            this.interestList.push(false)
           }
         }
       })
