@@ -7,6 +7,7 @@
       </div>
     </div>
     <Nothing v-if="changeNav==0" :tips="salonTip"></Nothing>
+    <Interest v-if="changeNav==1" :salon="interestList"></Interest>
     <Collect v-if="changeNav==2" :sponsors="collectList"></Collect>
   </div>
 </template>
@@ -14,6 +15,7 @@
 <script>
 import User from '@/components/user/user'
 import Nothing from '@/components/nothing/nothing'
+import Interest from '@/components/interest/interest'
 import Collect from '@/components/collect/collect'
 export default {
   data() {
@@ -23,13 +25,15 @@ export default {
       navList: [{name:'参加'},{name:'感兴趣'},{name:'关注'}],
       current:null,
       salonTip:'还没有参加的沙龙',
-      collectList:[]
+      collectList:[],
+      interestList:[]
     };
   },
   components:{
     User,
     Nothing,
-    Collect
+    Collect,
+    Interest
   },
   onLoad(){
     this.$http
@@ -37,6 +41,7 @@ export default {
       .then((res) => {
         // 所有的主办方
         this.sponsors = res.data.data.sponsors;
+        this.active = res.data.data.active
 
         // 拿到缓存中的主办方收藏列表
         var cache = wx.getStorageSync('collectList')
@@ -54,7 +59,25 @@ export default {
           })
           return spon
         })
-        console.log(this.collectList)
+        // console.log(this.collectList)
+
+         // 拿到缓存中的活动感兴趣列表
+        var salonCache = wx.getStorageSync('interestList')
+        // 拿到感兴趣的活动的下角标数组
+        let salonList = []
+        salonCache.forEach((item,i) => {
+          if(item) salonList.push(i)
+        });
+
+        // 拿到感兴趣的活动信息列表
+        this.interestList = salonList.map(index => {
+          let sal
+          this.active.forEach((item,i) => {
+            if(index === i) sal = item
+          })
+          return sal
+        })
+        console.log(this.interestList)
         wx.hideLoading()
       });
   },
@@ -92,6 +115,7 @@ export default {
         color #000
         font-weight bold
         font-size 16px
+
   .collect
     width 100%
     height 100%
