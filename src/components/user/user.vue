@@ -4,8 +4,8 @@
       <open-data class="thumb" type="userAvatarUrl"></open-data>
     </div>
     <div class="service">
-      <image class="right-icon" src="/static/images/servicer.svg" ></image>
-      <image class="right-icon" src="/static/images/set.svg"></image>
+      <image class="right-icon" src="/static/images/servicer.svg"  @click="goServicer"></image>
+      <image class="right-icon" src="/static/images/set.svg" @click="goSetting"></image>
     </div>
     <div class="user-name">
       <div class="userName-btn">
@@ -20,7 +20,24 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    goSetting(){
+      wx.navigateTo({
+        url:'/pages/setting/main'
+      })
+    },
+    goServicer(){
+      wx.showToast({
+        icon:'none',
+        title:'暂不支持'
+      })
+    }
+  },
 }
 </script>
 

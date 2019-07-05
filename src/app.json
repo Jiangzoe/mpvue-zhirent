@@ -4,7 +4,10 @@
     "pages/sponsor/main",
     "pages/mine/main",
     "pages/salonInfo/main",
-    "pages/sponsorInfo/main"
+    "pages/sponsorInfo/main",
+    "pages/setting/main",
+    "pages/about/main",
+    "pages/center/main"
    ],
   "window": {
     "backgroundTextStyle": "light",

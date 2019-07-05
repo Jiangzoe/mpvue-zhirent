@@ -3,7 +3,7 @@
     <div class="sponsor-header">
       <image class="sponsor-icon" :src="sponsor.avatar"></image>
       <div class="sponsor-name">{{sponsor.name}}</div>
-      <Expander :info="sponsorInfo" :clickExpander="showDesc"></Expander>
+      <Expander :info="sponsorInfo" ></Expander>
      <button :class="sponsor.collected ? 'like' : 'unlike'">{{sponsor.collected ? '已关注' : '关注'}}</button>
     </div>
     <div class="salon-num">主办{{sponsor.salonNum}}场沙龙</div>
@@ -54,6 +54,8 @@ export default {
             return sal
           })
         }
+        // 拿到缓存区的收藏信息
+        this.isCollected = wx.
         // console.log(this.salonList)
          wx.hideLoading()
       }).catch((e) => {

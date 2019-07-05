@@ -17,9 +17,8 @@ export default {
     }
   },
   methods: {
-    ellipsis(val){
+    ellipsis(){
       this.isEllipsis =!this.isEllipsis
-      this.$emit('clickExpander')
     }
   },
   props:[

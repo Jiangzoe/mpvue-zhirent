@@ -56,8 +56,21 @@ Vue.prototype.getList = function (){
         if (res.data.errno === 0) {
           this.active = res.data.data.active;
           this.sponsors = res.data.data.sponsors
-          wx.hideLoading()
-          
+          wx.hideLoading() 
+
+          // 获取默认的主办方收藏列表
+          for(let i = 0 ; i< this.sponsors.length;i++){
+            this.collectList.push(false)
+          }
+          var cache = wx.getStorageSync('collectList')
+          if(!cache){
+            wx.setStorage({
+              key:"collectList",
+              data:this.collectList
+            })
+          }else{
+            this.collectList = cache
+          }
         }
       })
 }

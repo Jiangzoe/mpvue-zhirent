@@ -1,7 +1,7 @@
 <template>
   <div class="salon-desc">
     <image class="header-img" :src="salon.theme"/>
-    <div class="desc-container">
+    <div class="detail-container">
       <div class="card-container">
         <div class="card-info">
           <div class="card-title">{{salon.title}}</div>
@@ -47,12 +47,12 @@
       </div>
       <div class="salon-info">
         <p class="info-item">活动详情</p>
-        <Expander v-bind:info="salonInfo" v-on:clickExpander="showDesc"></Expander>
+        <Expander :info="salonInfo"></Expander>
       </div>
-      <Guest v-bind:guest="guests"></Guest>
-      <Sponsor v-bind:sponsor="sponsors" :list="sponsorList"></Sponsor>
-      <Photo v-bind:photo="photos" :allPhotos="showPhotos" :imgList="photos.photoInfo"></Photo>
-      <Essay v-bind:article="articles"></Essay>
+      <Guest :guest="guests"></Guest>
+      <Sponsor :sponsor="sponsors" :list="sponsorList"></Sponsor>
+      <Photo :photo="photos" :imgList="photos.photoInfo"></Photo>
+      <Essay :article="articles"></Essay>
     </div>
     <div class="footer">
       <div @click="goShare" class="footer-item">
@@ -61,8 +61,8 @@
         </div>
         <div class="item-name">分享</div>
       </div>
-      <div class="footer-item" @click="like">
-        <image class="footer-icon" :src="isLike?'/static/images/like.svg':'/static/images/unlike.svg'" ></image>
+      <div class="footer-item" @click="interest">
+        <image class="footer-icon" :src="isInterested?'/static/images/like.svg':'/static/images/unlike.svg'" ></image>
         <text class="item-name">感兴趣</text>
       </div>
       <div class="footer-item">
@@ -92,7 +92,8 @@ export default {
       guests:[],
       photos:{},
       sponsorList:[],
-      isShare:false
+      isShare:false,
+      isInterested:true
     }
   },
   components:{
@@ -137,15 +138,19 @@ export default {
           })
            return spon;
         })
-        console.log(this.sponsorList);
         
         wx.hideLoading()
       });
   },
   methods: {
-    showDesc(){
-    },
-    showPhotos(){
+    interest(){
+      wx.showLoading({
+        title:'加载中'
+      })
+      setTimeout(function () {
+        wx.hideLoading()
+      }, 1000)
+      
     },
     goShare(){
       this.isShare = !this.isShare
@@ -162,7 +167,6 @@ export default {
   background-color #000
   opacity 0.9
 
-
 .salon-desc
   width 100%
   height 100%
@@ -170,7 +174,7 @@ export default {
   .header-img
     height 190px
     width 100%
-  .desc-container
+  .detail-container
     padding 0 15px
     margin-bottom 80px
     .card-container
