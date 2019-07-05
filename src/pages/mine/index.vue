@@ -7,12 +7,14 @@
       </div>
     </div>
     <Nothing v-if="changeNav==0" :tips="salonTip"></Nothing>
+    <Collect v-if="changeNav==2" :sponsors="collectList"></Collect>
   </div>
 </template>
 
 <script>
 import User from '@/components/user/user'
 import Nothing from '@/components/nothing/nothing'
+import Collect from '@/components/collect/collect'
 export default {
   data() {
     return {
@@ -20,12 +22,41 @@ export default {
       changeNav:0,
       navList: [{name:'参加'},{name:'感兴趣'},{name:'关注'}],
       current:null,
-      salonTip:'还没有参加的沙龙'
+      salonTip:'还没有参加的沙龙',
+      collectList:[]
     };
   },
   components:{
     User,
-    Nothing
+    Nothing,
+    Collect
+  },
+  onLoad(){
+    this.$http
+      .get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
+      .then((res) => {
+        // 所有的主办方
+        this.sponsors = res.data.data.sponsors;
+
+        // 拿到缓存中的主办方收藏列表
+        var cache = wx.getStorageSync('collectList')
+        // 拿到收藏的主办方的下角标数组
+        let targetList = []
+        cache.forEach((item,i) => {
+          if(item) targetList.push(i)
+        });
+
+        // 拿到收藏的主办方信息列表
+        this.collectList = targetList.map(index => {
+          let spon
+          this.sponsors.forEach((item,i) => {
+            if(index === i) spon = item
+          })
+          return spon
+        })
+        console.log(this.collectList)
+        wx.hideLoading()
+      });
   },
   methods: {
     swichNav(e){
@@ -61,4 +92,7 @@ export default {
         color #000
         font-weight bold
         font-size 16px
+  .collect
+    width 100%
+    height 100%
 </style>

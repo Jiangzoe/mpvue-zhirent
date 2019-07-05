@@ -1,6 +1,7 @@
 <template>
-<div class="collect-container">
-  <div v-for="(item,index) in sponsors" :key="index"  @click="toSponsorInfo(index)">
+<div>
+  <div class="collect-container" v-if="sponsors.length>0">
+    <div v-for="(item,index) in sponsors" :key="index"  @click="toSponsorInfo(index)">
       <div class="card-container">
         <div class="card-content">
           <div class="card-icon">
@@ -17,24 +18,31 @@
         </div>
       </div>
     </div>
+    <div class="tips">~ 到底了 ~</div>
   </div>
+  <Nothing v-else :tips="collectTip"></Nothing>
+</div>
 </template>
 
 <script>
+import Nothing from '@/components/nothing/nothing'
 export default {
   data() {
     return {
-      
+      sponsors:[],
+      collectTip:'还没有关注的主办方'
     }
   },
-  props:['sponsors']
+  props:['sponsors'],
+  components:{
+    Nothing
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
-.sponsor
-  width 100%
-  height 100%
+.collect-container
+  padding 20px 10px
   background-color #f4f6f8
   .card-container
     padding 15px
@@ -82,4 +90,10 @@ export default {
         margin-top 5px
         font-size 14px
         color #b6b9b5
+
+
+.tips
+  font-size 14px
+  width 100%
+  text-align center
 </style>
