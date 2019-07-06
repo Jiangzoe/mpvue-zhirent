@@ -1,7 +1,7 @@
 <template>
   <div class="interest-container">
     <div v-if="salon.length>0" >
-        <Salon :list="salon"></Salon>
+        <Salon :list="salon" @go="goDetail"></Salon>
       <div class="tips">~ 到底了 ~</div>
     </div>
     <Nothing v-else :tips="interestTip"></Nothing>
@@ -21,7 +21,12 @@ export default {
     Salon,
     Nothing
   },
-  props:['salon']
+  props:['salon'],
+  methods: {
+    goDetail(index){
+      this.$emit('goDetail',index)
+    }
+  },
 }
 </script>
 

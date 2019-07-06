@@ -1,8 +1,8 @@
 <template>
 <div>
   <div class="collect-container" v-if="sponsors.length>0">
-    <div v-for="(item,index) in sponsors" :key="index"  @click="toSponsorInfo(index)">
-      <div class="card-container">
+    <div v-for="(item,index) in sponsors" :key="index" >
+      <div class="card-container" @click="go(index)">
         <div class="card-content">
           <div class="card-icon">
             <image class="icon" :src="item.avatar"></image>
@@ -36,7 +36,12 @@ export default {
   props:['sponsors'],
   components:{
     Nothing
-  }
+  },
+  methods: {
+    go(index){
+     this.$emit('go',index)
+    }
+  },
 }
 </script>
 

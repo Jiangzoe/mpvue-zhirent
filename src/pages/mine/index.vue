@@ -7,8 +7,8 @@
       </div>
     </div>
     <Nothing v-if="changeNav==0" :tips="salonTip"></Nothing>
-    <Interest v-if="changeNav==1" :salon="interestList"></Interest>
-    <Collect v-if="changeNav==2" :sponsors="collectList"></Collect>
+    <Interest v-if="changeNav==1" :salon="interestList" @goDetail="goSalonDetail"></Interest>
+    <Collect v-if="changeNav==2" :sponsors="collectList" @go="goSponDetail"></Collect>
   </div>
 </template>
 
@@ -26,7 +26,9 @@ export default {
       current:null,
       salonTip:'还没有参加的沙龙',
       collectList:[],
-      interestList:[]
+      interestList:[],
+      targetList:[],
+      salonList:[]
     };
   },
   components:{
@@ -46,13 +48,13 @@ export default {
         // 拿到缓存中的主办方收藏列表
         var cache = wx.getStorageSync('collectList')
         // 拿到收藏的主办方的下角标数组
-        let targetList = []
+        this.targetList = []
         cache.forEach((item,i) => {
-          if(item) targetList.push(i)
+          if(item) this.targetList.push(i)
         });
 
         // 拿到收藏的主办方信息列表
-        this.collectList = targetList.map(index => {
+        this.collectList = this.targetList.map(index => {
           let spon
           this.sponsors.forEach((item,i) => {
             if(index === i) spon = item
@@ -64,13 +66,13 @@ export default {
          // 拿到缓存中的活动感兴趣列表
         var salonCache = wx.getStorageSync('interestList')
         // 拿到感兴趣的活动的下角标数组
-        let salonList = []
+        this.salonList = []
         salonCache.forEach((item,i) => {
-          if(item) salonList.push(i)
+          if(item) this.salonList.push(i)
         });
 
         // 拿到感兴趣的活动信息列表
-        this.interestList = salonList.map(index => {
+        this.interestList = this.salonList.map(index => {
           let sal
           this.active.forEach((item,i) => {
             if(index === i) sal = item
@@ -86,6 +88,18 @@ export default {
       const current = e.currentTarget.dataset.current
       this.changeNav = current
       this.current = current
+    },
+    goSponDetail(index){
+      const url = `/pages/sponsorInfo/main?index=${this.targetList[index]}`
+      wx.navigateTo({
+        url
+      })
+    },
+    goSalonDetail(index){
+      const url = `/pages/salonInfo/main?index=${this.salonList[index]}`
+      wx.navigateTo({
+        url
+      })
     }
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card-container" v-for="(item,index) in list" :key="index">
-      <div class="salon-card" >
+      <div class="salon-card" @click="go(index)">
         <div class="salon-title">{{item.title}}</div>
         <div class="salon-content">
           <div class="content-left">
@@ -29,7 +29,12 @@ export default {
   components:{
     Popularity
   },
-  props:['list']
+  props:['list'],
+  methods: {
+    go(index){
+      this.$emit('go',index)
+    }
+  },
 }
 </script>
 
