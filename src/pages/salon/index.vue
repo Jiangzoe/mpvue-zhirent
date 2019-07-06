@@ -1,43 +1,41 @@
 <template>
   <div class="salons">
-    <div v-for="(item,index) in active" :key="index" @click="toSalonInfo(index)">
-      <div class="card-container">
-        <div class="card-title">{{item.title}}</div>
-        <div class="card-content">
-          <div class="card-img">
-            <image :src="item.theme" class="theme-img"></image>
+    <div v-for="(item,index) in active" :key="index" class="card-container" @click="toSalonInfo(index)" >
+      <div class="card-title">{{item.title}}</div>
+      <div class="card-content">
+        <div class="card-img">
+          <image :src="item.theme" class="theme-img"></image>
+        </div>
+        <div class="card-info">
+          <div class="card-item">
+            <div class="item-icon">
+              <image :src="item.sponsorIcon" class="sponsor-icon"></image>
+            </div>
+            <div class="item-info sponsor-name">{{item.sponsorName}}</div>
           </div>
-          <div class="card-info">
-            <div class="card-item">
-              <div class="item-icon">
-                <image :src="item.sponsorIcon" class="sponsor-icon"></image>
-              </div>
-              <div class="item-info sponsor-name">{{item.sponsorName}}</div>
+          <div class="card-item">
+            <div class="item-icon">
+              <image class="info-icon" src="/static/images/time.svg"></image>
             </div>
-            <div class="card-item">
-              <div class="item-icon">
-                <image class="info-icon" src="/static/images/time.svg"></image>
-              </div>
-              <div class="item-info">{{item.startTime}}</div>
+            <div class="item-info">{{item.startTime}}</div>
+          </div>
+          <div class="card-item">
+            <div class="item-icon">
+              <image class="info-icon" src="/static/images/address.svg"></image>
             </div>
-            <div class="card-item">
-              <div class="item-icon">
-                <image class="info-icon" src="/static/images/address.svg"></image>
-              </div>
-              <div class="item-info">{{item.address}}</div>
+            <div class="item-info">{{item.address}}</div>
+          </div>
+          <div class="card-item">
+            <div class="item-icon">
+              <image class="info-icon" src="/static/images/prices.svg"></image>
             </div>
-            <div class="card-item">
-              <div class="item-icon">
-                <image class="info-icon" src="/static/images/prices.svg"></image>
-              </div>
-              <div class="item-info">{{item.prices}}</div>
-            </div>
+            <div class="item-info">{{item.prices}}</div>
           </div>
         </div>
-        <div class="card-footer">
-          <Popularity v-bind:popularity="item"></Popularity>
-          <div class="status">已结束</div>
-        </div>
+      </div>
+      <div class="card-footer">
+        <Popularity v-bind:popularity="item"></Popularity>
+        <div class="status">已结束</div>
       </div>
     </div>
   </div>

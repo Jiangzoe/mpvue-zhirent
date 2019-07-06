@@ -1,21 +1,19 @@
 <template>
   <div class="sponsor">
-    <div v-for="(item,index) in sponsors" :key="index"  @click="toSponsorInfo(index)">
-      <div class="card-container">
-        <div class="card-content">
-          <div class="card-icon">
-            <image class="icon" :src="item.avatar"></image>
-          </div>
-          <div class="card-info">
-            <div class="card-title">{{item.name}}</div>
-            <div class="card-desc">{{item.info}}</div>
-          </div>
-          <button @click.stop="collect(index)" :class="collectList[index] ? 'like' : 'unlike'">{{collectList[index] ? '已关注' : '关注'}}</button>
+    <div v-for="(item,index) in sponsors"  :key="index"  @click="toSponsorInfo(index)" class="card-container">
+      <div class="card-content">
+        <div class="card-icon">
+          <image class="icon" :src="item.avatar"></image>
         </div>
-        <div class="card-footer">
-          <div class="card-salon-num">共举办{{item.salonNum}}场沙龙</div>
-          <div v-if="item.salonNum>0" class="card-recently">最近沙龙：{{item.salons[0].title}}</div>
+        <div class="card-info">
+          <div class="card-title">{{item.name}}</div>
+          <div class="card-desc">{{item.info}}</div>
         </div>
+        <button @click.stop="collect(index)" :class="collectList[index] ? 'like' : 'unlike'">{{collectList[index] ? '已关注' : '关注'}}</button>
+      </div>
+      <div class="card-footer">
+        <div class="card-salon-num">共举办{{item.salonNum}}场沙龙</div>
+        <div v-if="item.salonNum>0" class="card-recently">最近沙龙：{{item.salons[0].title}}</div>
       </div>
     </div>
   </div>
