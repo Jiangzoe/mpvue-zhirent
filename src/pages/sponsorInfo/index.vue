@@ -8,8 +8,8 @@
     </div>
     <div class="salon-num">主办{{sponsor.salonNum}}场沙龙</div>
     <div v-if="sponsor.salonNum>0">
-      <div class="card-container" v-for="(item,index) in salonList" :key="index">
-        <Salon v-bind:list="item" v-bind:father="item"></Salon>
+      <div class="content-container">
+       <Salon v-bind:list="salonList"></Salon>
       </div>
     </div>
   </div>
@@ -57,6 +57,7 @@ export default {
             return sal
           })
         }
+       
          wx.hideLoading()
       });
   },
@@ -122,13 +123,6 @@ export default {
     margin-left 15px
     font-weight bold
 
-
-
-
-  .card-container
-    background-color #fff
-    box-sizing border-box
-    padding 10px 15px
-    margin 0 10px 10px
-    position relative
+.content-container
+  padding 0 10px
 </style>
