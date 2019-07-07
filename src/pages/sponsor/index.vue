@@ -49,30 +49,40 @@ export default {
       });
     },
     collect(index){
+      let self = this
       var cache = wx.getStorageSync('collectList')
       var currentCache = cache[index]
       if(!currentCache){
         currentCache = true
+        wx.showLoading({
+          title: '加载中',
+        })
+        cache[index] = currentCache
+        wx.setStorage({
+          key:'collectList',
+          data:cache
+        })
+        self.collectList = cache
+        wx.hideLoading()
       }else{
         wx.showActionSheet({
-        itemList: ['取消关注'],
-        success (res) {
-          currentCache = false
-          // wx.showLoading({
-          //   title: '加载中',
-          // })
-          // setTimeout(function () {
-          //   wx.hideLoading()
-          // }, 2000)
-        }
-      })
+          itemList: ['取消关注'],
+          success (res) {
+            wx.showLoading({
+              title: '加载中',
+            })
+            currentCache = false
+            cache[index] = currentCache
+            wx.setStorage({
+              key:'collectList',
+              data:cache
+            })
+            self.collectList = cache
+            wx.hideLoading()
+          }
+        })
       }
-      cache[index] = currentCache
-      wx.setStorage({
-        key:'collectList',
-        data:cache
-      })
-      this.collectList = cache
+      
     }
   },
   

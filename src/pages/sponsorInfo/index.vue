@@ -70,8 +70,6 @@ export default {
             return num
           })
         }
-        console.log(this.salTargetList)
-       
          wx.hideLoading()
       });
   },
@@ -83,14 +81,38 @@ export default {
   methods: {
     collect(){
       var cache = wx.getStorageSync('collectList')
-      var currentCache = cache[this.index]
-      currentCache = !currentCache
-      cache[this.index] = currentCache
-      wx.setStorage({
-        key:'collectList',
-        data:cache
-      })
-      this.isCollected = cache[this.index]
+      let self = this
+      var currentCache = cache[self.index]
+      if(!currentCache){
+        wx.showLoading({
+          title:'加载中'
+        })
+        currentCache = true
+        cache[self.index] = currentCache
+        wx.setStorage({
+          key:'collectList',
+          data:cache
+        })
+        self.isCollected = cache[self.index]
+        wx.hideLoading()
+      }else{
+        wx.showActionSheet({
+          itemList: ['取消关注'],
+          success(res){
+            wx.showLoading({
+              title:'加载中'
+            })
+            currentCache = false
+            cache[self.index] = currentCache
+            wx.setStorage({
+              key:'collectList',
+              data:cache
+            })
+            self.isCollected = cache[self.index]
+            wx.hideLoading()
+          }
+        })
+      }
     },
     goSalonDetail(index){
       const url = `/pages/salonInfo/main?index=${this.salTargetList[index]}`

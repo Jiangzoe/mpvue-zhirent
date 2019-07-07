@@ -41,7 +41,7 @@
               <image class="item-avatar" :src="interestInfo[1].avatar"></image>
               <image class="item-avatar" :src="interestInfo[2].avatar"></image>
             </div>
-            <div class="join-desc">{{salon.interestNum}}人感兴趣</div>
+            <div class="join-desc">{{interestNum}}人感兴趣</div>
           </div>
         </div>
       </div>
@@ -94,7 +94,8 @@ export default {
       sponsorList:[],
       isShare:false,
       isInterested:'',
-      sponTargetList:[]
+      sponTargetList:[],
+      interestNum:''
     }
   },
   components:{
@@ -131,7 +132,8 @@ export default {
         this.photos = this.salon.photos
         // 文章
         this.articles = this.salon.articles
-        
+        // 感兴趣人数
+        this.interestNum = this.salon.interestNum
         // 拿到详细的主办方信息
         this.sponsorList = this.sponsors.sponsorsInfo.map(item=>{
           let spon;
@@ -149,7 +151,9 @@ export default {
           })
            return num;
         })
-
+        // if(this.isInterested){
+        //   this.interestNum++
+        // }
         wx.hideLoading()
     })
   },
@@ -171,9 +175,7 @@ export default {
         data:cache
       })
       this.isInterested = cache[this.index]
-      setTimeout(function () {
-        wx.hideLoading()
-      }, 1000)
+      wx.hideLoading()
     },
     goSponDetail(index){
       const url = `/pages/sponsorInfo/main?index=${this.sponTargetList[index]}`
