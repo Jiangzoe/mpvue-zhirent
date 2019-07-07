@@ -9,7 +9,7 @@
     <div class="salon-num">主办{{sponsor.salonNum}}场沙龙</div>
     <div v-if="sponsor.salonNum>0">
       <div class="content-container">
-       <Salon v-bind:list="salonList"></Salon>
+       <Salon :list="salonList" @go="goSalonDetail"></Salon>
       </div>
     </div>
   </div>
@@ -25,7 +25,8 @@ export default {
       sponsor:{},
       salonList:[],
       index:'',
-      isCollected:''
+      isCollected:'',
+      salTargetList:[]
     }
   },
   components:{
@@ -57,6 +58,19 @@ export default {
             return sal
           })
         }
+
+        // 拿到活动列表的下标数组
+         // 拿到详细的活动详情
+        if(this.sponsor.salonNum>0){
+          this.salTargetList = this.sponsor.salons.map(item=>{
+            let num
+            salonsInfos.forEach((salon,index) => {
+              if(salon.title === item.title) num = index
+            })
+            return num
+          })
+        }
+        console.log(this.salTargetList)
        
          wx.hideLoading()
       });
@@ -77,6 +91,12 @@ export default {
         data:cache
       })
       this.isCollected = cache[this.index]
+    },
+    goSalonDetail(index){
+      const url = `/pages/salonInfo/main?index=${this.salTargetList[index]}`
+      wx.navigateTo({
+        url
+      })
     }
   },
 }
