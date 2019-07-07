@@ -1,6 +1,6 @@
 <template>
   <div class="interest-container">
-    <div v-if="salon.length>0" >
+    <div v-if="salon.length>0" class="salon-container">
         <Salon :list="salon" @go="goDetail"></Salon>
       <div class="tips">~ 到底了 ~</div>
     </div>
@@ -32,8 +32,10 @@ export default {
 
 <style lang="stylus" scoped>
 .interest-container
-  padding 20px 10px
+  padding 0 10px
   background-color #f4f6f8
+  .salon-container
+    margin-top 20px
 
 .tips
   width 100%

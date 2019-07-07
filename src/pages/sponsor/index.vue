@@ -58,8 +58,6 @@ export default {
         itemList: ['取消关注'],
         success (res) {
           currentCache = false
-          console.log(res.tapIndex)
-          // return currentCache
           // wx.showLoading({
           //   title: '加载中',
           // })
