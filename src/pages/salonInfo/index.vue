@@ -36,7 +36,7 @@
             <div class="join-desc">{{salon.joinNum}}人报名</div>
           </div>
           <div class="footer-item">
-            <div class="footer-avatar">
+            <div class="footer-avatar" >
               <image class="item-avatar" :src="interestInfo[0].avatar"></image>
               <image class="item-avatar" :src="interestInfo[1].avatar"></image>
               <image class="item-avatar" :src="interestInfo[2].avatar"></image>
@@ -50,7 +50,7 @@
         <Expander :info="salonInfo"></Expander>
       </div>
       <Guest :guest="guests"></Guest>
-      <Sponsor :sponsor="sponsors" :list="sponsorList"></Sponsor>
+      <Sponsor :sponsor="sponsors" :list="sponsorList" @goDetail="goSponDetail"></Sponsor>
       <Photo :photo="photos" :imgList="photos.photoInfo"></Photo>
       <Essay :article="articles"></Essay>
     </div>
@@ -93,7 +93,8 @@ export default {
       photos:{},
       sponsorList:[],
       isShare:false,
-      isInterested:''
+      isInterested:'',
+      sponTargetList:[]
     }
   },
   components:{
@@ -139,9 +140,18 @@ export default {
           })
            return spon;
         })
-        
+
+        //拿到主办方列表的下标数组
+        this.sponTargetList = this.sponsors.sponsorsInfo.map(item=>{
+          let num;
+          sponsorsInfos.forEach((sponsor,index)=>{
+            if(sponsor.name === item.name) num = index
+          })
+           return num;
+        })
+
         wx.hideLoading()
-      });
+    })
   },
   onShow(){
     var cache = wx.getStorageSync('interestList')
@@ -164,6 +174,12 @@ export default {
       setTimeout(function () {
         wx.hideLoading()
       }, 1000)
+    },
+    goSponDetail(index){
+      const url = `/pages/sponsorInfo/main?index=${this.sponTargetList[index]}`
+      wx.navigateTo({
+        url
+      })
     },
     goShare(){
       this.isShare = !this.isShare

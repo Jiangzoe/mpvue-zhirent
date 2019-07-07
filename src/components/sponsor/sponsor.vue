@@ -2,7 +2,7 @@
   <div class="salon-info">
     <p class="info-item">{{sponsor.sponsorsNum}}个主办方</p>
     <div class="sponsor-container"  v-for="(item,index) in list" :key="index">
-    <div class="sponsor-card">
+    <div class="sponsor-card" @click="goDetail(index)">
       <image class="sponsor-icon" :src="item.avatar"></image>
       <div class="sponsor-info">
         <p class="sponsor-item">{{item.name}}</p>
@@ -21,8 +21,12 @@ export default {
       
     }
   },
-  props:['sponsor','list']
-
+  props:['sponsor','list'],
+  methods: {
+    goDetail(index){
+      this.$emit('goDetail',index)
+    }
+  },
 }
 </script>
 
