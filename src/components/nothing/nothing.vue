@@ -20,6 +20,7 @@ export default {
 
 <style lang="stylus" scoped>
 .container
+  margin-top 80px
   text-align center
   .icon
     width 45px

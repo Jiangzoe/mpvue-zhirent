@@ -3,6 +3,7 @@
     "pages/salon/main",
     "pages/sponsor/main",
     "pages/mine/main",
+    "pages/authorize/main",
     "pages/salonInfo/main",
     "pages/sponsorInfo/main",
     "pages/setting/main",

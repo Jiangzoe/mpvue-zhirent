@@ -41,8 +41,15 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/authorize/main",
+					"pathName": "pages/authorize/main",
+					"scene": null
+				}
+			]
 		}
 	}
 }
