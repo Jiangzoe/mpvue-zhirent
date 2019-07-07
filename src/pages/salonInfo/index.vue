@@ -151,9 +151,6 @@ export default {
           })
            return num;
         })
-        // if(this.isInterested){
-        //   this.interestNum++
-        // }
         wx.hideLoading()
     })
   },

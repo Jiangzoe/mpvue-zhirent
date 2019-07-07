@@ -28,7 +28,9 @@ export default {
       collectList:[],
       interestList:[],
       targetList:[],
-      salonList:[]
+      salonList:[],
+      nickName:'',
+      avatarUrl:''
     };
   },
   components:{
@@ -79,9 +81,20 @@ export default {
           })
           return sal
         })
-        console.log(this.interestList)
+        // console.log(this.interestList)
         wx.hideLoading()
-      });
+    });
+    wx.getUserInfo({
+      success(res){
+        var userInfo = res.userInfo
+        console.log(userInfo)
+        var nickName = userInfo.nickName
+        var avatarUrl = userInfo.avatarUrl
+        wx.setNavigationBarTitle({
+          title: nickName
+        })
+      }
+    })
   },
   methods: {
     swichNav(e){
