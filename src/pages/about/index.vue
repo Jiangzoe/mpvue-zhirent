@@ -11,6 +11,11 @@
 
 <script>
 export default {
+  onLoad(){
+    wx.setNavigationBarTitle({
+      title: '关于职人'
+    })
+  }
 
 }
 </script>

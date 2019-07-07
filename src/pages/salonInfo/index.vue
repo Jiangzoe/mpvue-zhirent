@@ -107,6 +107,9 @@ export default {
     Share
   },
   onLoad(options) {
+    wx.setNavigationBarTitle({
+      title: '沙龙详情'
+    })
     let i = options.index;
     this.index = i
     wx.showLoading({

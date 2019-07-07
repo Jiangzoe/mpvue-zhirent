@@ -22,6 +22,11 @@ export default {
       
     }
   },
+  onLoad(){
+    wx.setNavigationBarTitle({
+      title: '设置'
+    })
+  },
   methods: {
     goAbout(){
       wx.navigateTo({

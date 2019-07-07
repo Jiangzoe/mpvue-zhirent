@@ -28,6 +28,9 @@ export default {
     }
   },
   onLoad(){
+    wx.setNavigationBarTitle({
+      title: '主办方'
+    })
     this.getList()
   },
   onShow(){

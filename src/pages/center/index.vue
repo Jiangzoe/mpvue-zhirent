@@ -16,7 +16,11 @@
 
 <script>
 export default {
-
+  onLoad(){
+    wx.setNavigationBarTitle({
+      title: '主办方中心'
+    })
+  }
 }
 </script>
 

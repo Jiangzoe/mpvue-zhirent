@@ -34,6 +34,9 @@ export default {
     Salon
   },
   onLoad(options){
+    wx.setNavigationBarTitle({
+      title: '主办方主页'
+    })
      let i = options.index;
      this.index = i
      wx.showLoading({

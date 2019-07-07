@@ -55,6 +55,9 @@ export default {
      Popularity
   },
   onLoad(){
+    wx.setNavigationBarTitle({
+      title: '沙龙'
+    })
     this.getList();
   },
   onShow(){

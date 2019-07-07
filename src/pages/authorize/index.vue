@@ -11,6 +11,11 @@
 
 <script>
 export default {
+  onLoad(){
+    wx.setNavigationBarTitle({
+      title: '授权'
+    })
+  },
   methods: {
     getuserinfo(){
       wx.getSetting({
