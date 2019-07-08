@@ -95,7 +95,6 @@ export default {
       isShare:false,
       isInterested:'',
       sponTargetList:[],
-      user:{}
     }
   },
   components:{
@@ -157,16 +156,24 @@ export default {
 
         wx.hideLoading()
     })
+    // 获取用户信息
   },
   onShow(){
-    var cache = wx.getStorageSync('interestList')
-    this.isInterested = cache[this.index]
-    // 拿到用户信息
+    self = this
     wx.getUserInfo({
       success(res){
         var userInfo = res.userInfo
         var nickName = userInfo.nickName
         var avatarUrl = userInfo.avatarUrl
+        self.user = {
+          name:nickName,
+          avatar:avatarUrl
+        }
+        var cache = wx.getStorageSync('interestList')
+        self.isInterested = cache[self.index]
+        if(self.isInterested){
+          self.interestInfo.unshift(self.user)
+        }
       }
     })
   },
@@ -177,14 +184,29 @@ export default {
       })
       var cache = wx.getStorageSync('interestList')
       var currentCache = cache[this.index]
-      currentCache = !currentCache
-      cache[this.index] = currentCache
-      wx.setStorage({
-        key:'interestList',
-        data:cache
-      })
-      this.isInterested = cache[this.index]
-      wx.hideLoading()
+      if(!currentCache){
+        currentCache = true
+        this.interestInfo.unshift(this.user)
+        cache[this.index] = currentCache
+        wx.setStorage({
+          key:'interestList',
+          data:cache
+        })
+        this.isInterested = cache[this.index]
+        wx.hideLoading()
+      }else{
+        currentCache = false
+        this.interestInfo.shift()
+        cache[this.index] = currentCache
+        wx.setStorage({
+          key:'interestList',
+          data:cache
+        })
+        this.isInterested = cache[this.index]
+        wx.hideLoading()
+      }
+      
+      
     },
     goSponDetail(index){
       const url = `/pages/sponsorInfo/main?index=${this.sponTargetList[index]}`
