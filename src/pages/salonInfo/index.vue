@@ -95,7 +95,8 @@ export default {
       isShare:false,
       isInterested:'',
       sponTargetList:[],
-      interestNum:''
+      interestNum:'',
+      user:{}
     }
   },
   components:{
@@ -154,12 +155,24 @@ export default {
           })
            return num;
         })
+
         wx.hideLoading()
     })
   },
   onShow(){
     var cache = wx.getStorageSync('interestList')
     this.isInterested = cache[this.index]
+    // 拿到用户信息
+    wx.getUserInfo({
+      success(res){
+        var userInfo = res.userInfo
+        console.log(userInfo)
+        var nickName = userInfo.nickName
+        var avatarUrl = userInfo.avatarUrl
+      }
+    })
+    console.log(nickName)
+    // this.user = {name:nickName,avatar:avatarUrl} 
   },
   methods: {
     interest(){
