@@ -1,6 +1,6 @@
 <template>
   <div class="popularity">
-    <div v-if="popularity.joinNum>0" class="footer-avatar">
+    <div v-if="popularity.joinInfo.length>0" class="footer-avatar">
       <image v-if="popularity.joinInfo[0].avatar" class="show-avatar" :src="popularity.joinInfo[0].avatar" />
       <image v-if="popularity.joinInfo[1].avatar" class="show-avatar" :src="popularity.joinInfo[1].avatar" />
       <image v-if="popularity.joinInfo[2].avatar" class="show-avatar" :src="popularity.joinInfo[2].avatar" />
@@ -8,7 +8,7 @@
     <div v-else class="footer-avatar">
       <image class="show-avatar" src="/static/images/no-one.jpg" />
     </div>
-    <div class="footer-desc">{{popularity.joinNum}}人报名/{{popularity.interestNum}}人感兴趣</div>
+    <div class="footer-desc">{{popularity.joinInfo.length}}人报名/{{popularity.joinInfo.length}}人感兴趣</div>
   </div>
 </template>
 

@@ -33,7 +33,7 @@
               <image class="item-avatar" :src="joinInfo[1].avatar"></image>
               <image class="item-avatar" :src="joinInfo[2].avatar"></image>
             </div>
-            <div class="join-desc">{{salon.joinNum}}人报名</div>
+            <div class="join-desc">{{joinInfo.length}}人报名</div>
           </div>
           <div class="footer-item">
             <div class="footer-avatar" >
@@ -41,7 +41,7 @@
               <image class="item-avatar" :src="interestInfo[1].avatar"></image>
               <image class="item-avatar" :src="interestInfo[2].avatar"></image>
             </div>
-            <div class="join-desc">{{interestNum}}人感兴趣</div>
+            <div class="join-desc">{{interestInfo.length}}人感兴趣</div>
           </div>
         </div>
       </div>
@@ -95,7 +95,6 @@ export default {
       isShare:false,
       isInterested:'',
       sponTargetList:[],
-      interestNum:'',
       user:{}
     }
   },
@@ -166,13 +165,10 @@ export default {
     wx.getUserInfo({
       success(res){
         var userInfo = res.userInfo
-        console.log(userInfo)
         var nickName = userInfo.nickName
         var avatarUrl = userInfo.avatarUrl
       }
     })
-    console.log(nickName)
-    // this.user = {name:nickName,avatar:avatarUrl} 
   },
   methods: {
     interest(){
