@@ -5,7 +5,7 @@
     <div class="tips">
       职人是一个职场活动社交平台。小程序需要获取你的公开信息（昵称、头像等），才能正常使用
     </div>
-    <button class="authorize" open-type="getUserInfo" @getuserinfo="getuserinfo">同意授权</button>
+    <button class="authorize" open-type="getUserInfo" @getuserinfo="getUserInfo">同意授权</button>
   </div>
 </template>
 
@@ -17,13 +17,17 @@ export default {
     })
   },
   methods: {
-    getuserinfo(){
+    getUserInfo(){
       wx.getSetting({
         success:(res) => {
           if(res.authSetting['scope.userInfo']){
+            wx.showLoading({
+              title:'加载中'
+            })
             wx.reLaunch({
               url:'/pages/salon/main'
             })
+            wx.hideLoading()
           }
         }
       })

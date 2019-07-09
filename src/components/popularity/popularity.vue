@@ -8,7 +8,7 @@
     <div v-else class="footer-avatar">
       <image class="show-avatar" src="/static/images/no-one.jpg" />
     </div>
-    <div class="footer-desc">{{popularity.joinInfo.length}}人报名/{{popularity.joinInfo.length}}人感兴趣</div>
+    <div class="footer-desc">{{popularity.joinInfo.length}}人报名/{{popularity.interestInfo.length}}人感兴趣</div>
   </div>
 </template>
 
