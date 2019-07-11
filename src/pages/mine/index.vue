@@ -23,7 +23,6 @@ export default {
       userInfo: {},
       changeNav:0,
       navList: [{name:'参加'},{name:'感兴趣'},{name:'关注'}],
-      current:null,
       salonTip:'还没有参加的沙龙',
       collectList:[],
       interestList:[],
@@ -39,11 +38,12 @@ export default {
     Collect,
     Interest
   },
-  onLoad(){
+  onShow(){
     this.$http
       .get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
       .then((res) => {
         // 所有的主办方
+        wx.showLoading()
         this.sponsors = res.data.data.sponsors;
         this.active = res.data.data.active
 
@@ -100,7 +100,6 @@ export default {
     swichNav(e){
       const current = e.currentTarget.dataset.current
       this.changeNav = current
-      this.current = current
     },
     goSponDetail(index){
       const url = `/pages/sponsorInfo/main?index=${this.targetList[index]}`
