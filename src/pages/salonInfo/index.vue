@@ -114,8 +114,7 @@ export default {
     wx.showLoading({
       title:'加载中'
     }),
-    this.$http
-      .get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
+    this.$get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
       .then((res) => {
         let sponsorsInfos = res.data.data.sponsors;
         // 整条数据

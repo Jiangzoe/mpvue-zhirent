@@ -39,8 +39,7 @@ export default {
     Interest
   },
   onShow(){
-    this.$http
-      .get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
+    this.$get("https://www.easy-mock.com/mock/5d17149edc925c312db9c9ea/zhirent/zhirent")
       .then((res) => {
         // 所有的主办方
         wx.showLoading()
