@@ -39,13 +39,14 @@ export default {
   left 7px
   bottom 20px
   box-sizing border-box
-  padding 14px
+  padding 14px 14px 0
   text-align center
   z-index 999
   .tips
     width 100%
     font-size 14px
     color #a0a49f
+    margin-bottom 20px
   .type
     font-size 20px
     color #224fa4
@@ -53,6 +54,7 @@ export default {
     border none
     font-weight bold
     border 0
+    margin-bottom 10px
   .cancel
     width 100%
     font-size 16px

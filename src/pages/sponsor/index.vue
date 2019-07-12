@@ -56,10 +56,10 @@ export default {
       var cache = wx.getStorageSync('collectList')
       var currentCache = cache[index]
       if(!currentCache){
-        currentCache = true
         wx.showLoading({
           title: '加载中',
         })
+        currentCache = true
         cache[index] = currentCache
         wx.setStorage({
           key:'collectList',
