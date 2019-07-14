@@ -48,39 +48,47 @@ export default {
 
         // 拿到缓存中的主办方收藏列表
         var cache = wx.getStorageSync('collectList')
+        console.log(cache.length)
         // 拿到收藏的主办方的下角标数组
         this.targetList = []
-        cache.forEach((item,i) => {
-          if(item) this.targetList.push(i)
-        });
+        if(cache.length>0){
+          cache.forEach((item,i) => {
+            if(item) this.targetList.push(i)
+          });
 
-        // 拿到收藏的主办方信息列表
-        this.collectList = this.targetList.map(index => {
-          let spon
-          this.sponsors.forEach((item,i) => {
-            if(index === i) spon = item
+          // 拿到收藏的主办方信息列表
+          this.collectList = this.targetList.map(index => {
+            let spon
+            this.sponsors.forEach((item,i) => {
+              if(index === i) spon = item
+            })
+            return spon
           })
-          return spon
-        })
-        // console.log(this.collectList)
+          console.log(this.collectList)
+        }
+        
+       
 
          // 拿到缓存中的活动感兴趣列表
         var salonCache = wx.getStorageSync('interestList')
         // 拿到感兴趣的活动的下角标数组
         this.salonList = []
-        salonCache.forEach((item,i) => {
-          if(item) this.salonList.push(i)
-        });
+        if(salonCache.length>0){
+          salonCache.forEach((item,i) => {
+            if(item) this.salonList.push(i)
+          });
 
-        // 拿到感兴趣的活动信息列表
-        this.interestList = this.salonList.map(index => {
-          let sal
-          this.active.forEach((item,i) => {
-            if(index === i) sal = item
+          // 拿到感兴趣的活动信息列表
+          this.interestList = this.salonList.map(index => {
+            let sal
+            this.active.forEach((item,i) => {
+              if(index === i) sal = item
+            })
+            return sal
           })
-          return sal
-        })
         // console.log(this.interestList)
+        }
+        
         wx.hideLoading()
     });
     wx.getUserInfo({
