@@ -25,6 +25,8 @@ npm run dev
 
 ### 部分效果图
 不知道为什么，视频转gif出来灰色的字体就变成这个鬼样子了T-T
+
+
 ![](https://user-gold-cdn.xitu.io/2019/7/14/16bf02a70c5ca92c?w=277&h=600&f=gif&s=4540968)
 
 ![](https://user-gold-cdn.xitu.io/2019/7/14/16bf02ba2b238f44?w=277&h=600&f=gif&s=4802454)
