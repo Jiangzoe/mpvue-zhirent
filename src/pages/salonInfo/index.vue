@@ -1,52 +1,52 @@
 <template>
-  <div class="salon-desc">
+  <div class="page">
     <image class="header-img" :src="salon.theme"/>
     <div class="detail-container">
       <div class="card-container">
         <div class="card-info">
           <div class="card-title">{{salon.title}}</div>
           <div class="card-item">
-            <image class="item-icon" src="/static/images/time.svg" />
-            <text class="item-desc">{{salon.startTime}} 至 {{salon.endTime}}</text>
+            <image class="card-item__icon" src="/static/images/time.svg" />
+            <text class="card-item__desc">{{salon.startTime}} 至 {{salon.endTime}}</text>
           </div>
           <div class="card-item">
-            <image class="item-icon" src="/static/images/deadline.svg" />
-            <text class="item-desc">{{salon.deadline}}</text>
+            <image class="card-item__icon" src="/static/images/deadline.svg" />
+            <text class="card-item__desc">{{salon.deadline}}</text>
           </div>
           <div class="card-item">
-            <image class="item-icon" src="/static/images/address.svg"/>
-            <text class="item-desc">{{salon.address}}</text>
+            <image class="card-item__icon" src="/static/images/address.svg"/>
+            <text class="card-item__desc">{{salon.address}}</text>
           </div>
           <div class="card-item">
-            <image class="item-icon" src="/static/images/people.svg"/>
-            <text class="item-desc">{{salon.people}}人</text>
+            <image class="card-item__icon" src="/static/images/people.svg"/>
+            <text class="card-item__desc">{{salon.people}}人</text>
           </div>
           <div class="card-item">
-            <image class="item-icon" src="/static/images/prices.svg"/>
-            <text class="item-desc">{{salon.prices}}</text>
+            <image class="card-item__icon" src="/static/images/prices.svg"/>
+            <text class="card-item__desc">{{salon.prices}}</text>
           </div>
         </div>
         <div class="card-footer">
-          <div class="footer-item"> 
-            <div class="footer-avatar">
-              <image class="item-avatar" :src="joinInfo[0].avatar"></image>
-              <image class="item-avatar" :src="joinInfo[1].avatar"></image>
-              <image class="item-avatar" :src="joinInfo[2].avatar"></image>
+          <div class="card-footer__item"> 
+            <div class="card-footer__avatar">
+              <image class="user-avatar" :src="joinInfo[0].avatar"></image>
+              <image class="user-avatar" :src="joinInfo[1].avatar"></image>
+              <image class="user-avatar" :src="joinInfo[2].avatar"></image>
             </div>
             <div class="join-desc">{{joinInfo.length}}人报名</div>
           </div>
-          <div class="footer-item">
-            <div class="footer-avatar" >
-              <image class="item-avatar" :src="interestInfo[0].avatar"></image>
-              <image class="item-avatar" :src="interestInfo[1].avatar"></image>
-              <image class="item-avatar" :src="interestInfo[2].avatar"></image>
+          <div class="card-footer__item">
+            <div class="card-footer__avatar" >
+              <image class="user-avatar" :src="interestInfo[0].avatar"></image>
+              <image class="user-avatar" :src="interestInfo[1].avatar"></image>
+              <image class="user-avatar" :src="interestInfo[2].avatar"></image>
             </div>
             <div class="join-desc">{{interestInfo.length}}人感兴趣</div>
           </div>
         </div>
       </div>
-      <div class="salon-info">
-        <p class="info-item">活动详情</p>
+      <div class="salon-desc">
+        <p class="salon-desc__title">活动详情</p>
         <Expander :info="salonInfo"></Expander>
       </div>
       <Guest :guest="guests"></Guest>
@@ -56,14 +56,12 @@
     </div>
     <div class="footer">
       <div @click="goShare" class="footer-item">
-        <div>
-          <image class="footer-icon" src="/static/images/share.svg"></image>
-        </div>
-        <div class="item-name">分享</div>
+        <image class="footer-item__icon" src="/static/images/share.svg"></image>
+        <text class="footer-item__name">分享</text>
       </div>
       <div class="footer-item" @click="interest">
-        <image class="footer-icon" :src="isInterested?'/static/images/like.svg':'/static/images/unlike.svg'" ></image>
-        <text class="item-name">感兴趣</text>
+        <image class="footer-item__icon" :src="isInterested?'/static/images/like.svg':'/static/images/unlike.svg'" ></image>
+        <text class="footer-item__name">感兴趣</text>
       </div>
       <div class="footer-item">
         <div class="join">已结束</div>
@@ -228,7 +226,7 @@ export default {
   background-color #000
   opacity 0.9
 
-.salon-desc
+.page
   width 100%
   height 100%
   background-color #f4f6f8
@@ -256,24 +254,24 @@ export default {
           margin-bottom 20px
         .card-item
           margin-bottom 15px
-          .item-icon
+          .card-item__icon
             width 20px
             height 20px
             margin-right 10px
-          .item-desc 
+          .card-item__desc 
             font-size 14px
             height 20px
       .card-footer 
         display flex
-        .footer-item
+        .card-footer__item
           display flex 
           flex 1
           margin-top 20px
-          .footer-avatar
+          .card-footer__avatar
             margin-right 5px
             &first-child
               margin-left 0
-            .item-avatar
+            .user-avatar
               margin-left -5px
               width 25px
               height 25px
@@ -282,9 +280,9 @@ export default {
             font-size 14px
             line-height 25px
             color #3260ac
-    .salon-info
+    .salon-desc
       margin-bottom 30px
-      .info-item
+      .salon-desc__title
         color #43457a
         font-size 16px
         margin-bottom 10px
@@ -301,13 +299,13 @@ export default {
     display flex
     margin-top 10px
     margin-bottom 10px
-    .footer-icon
+    .footer-item__icon
       width 25px
       height 25px
       margin-top 10px
       margin-left 40px
       margin-right 8px
-    .item-name
+    .footer-item__name
       font-size 16px
       line-height 50px
       font-weight bold

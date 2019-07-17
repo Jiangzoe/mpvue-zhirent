@@ -1,6 +1,6 @@
 <template>
-  <div class="salon-info">
-    <p class="info-item">现场照片</p>
+  <div class="card-container">
+    <p class="card-container__title">现场照片</p>
     <div class="photo-container" v-if="photo.photoNum>0">
       <swiper :current="cur" next-margin="40px" @change="onSlideChangeEnd">
        <block  v-for="(item,index) in photo.photoInfo" :key="index">
@@ -42,9 +42,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.salon-info
+.card-container
   margin-bottom 30px
-  .info-item
+  .card-container__title
     color #43457a
     font-size 16px
     margin-bottom 10px

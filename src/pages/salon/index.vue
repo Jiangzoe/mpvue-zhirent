@@ -1,5 +1,5 @@
 <template>
-  <div class="salons">
+  <div class="page">
     <div v-for="(item,index) in active" :key="index" class="card-container" @click="toSalonInfo(index)" >
       <div class="card-title">{{item.title}}</div>
       <div class="card-content">
@@ -8,28 +8,28 @@
         </div>
         <div class="card-info">
           <div class="card-item">
-            <div class="item-icon">
+            <div class="card-item__icon">
               <image :src="item.sponsorIcon" class="sponsor-icon"></image>
             </div>
-            <div class="item-info sponsor-name">{{item.sponsorName}}</div>
+            <div class="card-item__info sponsor-name">{{item.sponsorName}}</div>
           </div>
           <div class="card-item">
-            <div class="item-icon">
-              <image class="info-icon" src="/static/images/time.svg"></image>
+            <div class="card-item__icon">
+              <image class="item-icon" src="/static/images/time.svg"></image>
             </div>
-            <div class="item-info">{{item.startTime}}</div>
+            <div class="card-item__info">{{item.startTime}}</div>
           </div>
           <div class="card-item">
-            <div class="item-icon">
-              <image class="info-icon" src="/static/images/address.svg"></image>
+            <div class="card-item__icon">
+              <image class="item-icon" src="/static/images/address.svg"></image>
             </div>
-            <div class="item-info">{{item.address}}</div>
+            <div class="card-item__info">{{item.address}}</div>
           </div>
           <div class="card-item">
-            <div class="item-icon">
-              <image class="info-icon" src="/static/images/prices.svg"></image>
+            <div class="card-item__icon">
+              <image class="item-icon" src="/static/images/prices.svg"></image>
             </div>
-            <div class="item-info">{{item.prices}}</div>
+            <div class="card-item__info">{{item.prices}}</div>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.salons
+.page
   width 100%
   height 100%
   background-color #f4f6f8
@@ -107,16 +107,16 @@ export default {
         .card-item 
           display flex
           margin-bottom 4px
-          .item-icon, .item-no 
+          .card-item__icon, .item-no 
             margin-right 10px
             .sponsor-icon 
               width 25px
               height 25px
               border-radius 50%       
-            .info-icon 
+            .item-icon 
               width 20px
               height 20px
-          .item-info 
+          .card-item__info 
             font-size 14px
             width 140px
             overflow hidden

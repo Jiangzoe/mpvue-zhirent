@@ -1,6 +1,6 @@
 <template>
-  <div class="salon-info">
-    <p class="info-item">{{sponsor.sponsorsNum}}个主办方</p>
+  <div class="card-container">
+    <p class="card-container__title">{{sponsor.sponsorsNum}}个主办方</p>
     <div class="sponsor-container"  v-for="(item,index) in list" :key="index">
     <div class="sponsor-card" @click="goDetail(index)">
       <image class="sponsor-icon" :src="item.avatar"></image>
@@ -31,9 +31,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.salon-info
+.card-container
   margin-bottom 30px
-  .info-item
+  .card-container__title
     color #43457a
     font-size 16px
     margin-bottom 10px

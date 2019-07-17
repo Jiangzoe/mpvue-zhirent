@@ -1,9 +1,9 @@
 <template>
-  <div class="mine">
+  <div class="page">
     <User></User>
     <div class="tab">
       <div class="tab-item"  v-for="(item,index) in navList" :key="index" :data-current="index" @click="swichNav">
-        <text class="item-text" :class="{active:changeNav == index}">{{item.name}}</text>
+        <text class="tab-item__text" :class="{active:changeNav == index}">{{item.name}}</text>
       </div>
     </div>
     <Nothing v-if="changeNav==0" :tips="salonTip"></Nothing>
@@ -125,7 +125,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.mine
+.page
   width 100%
   min-height 100vh
   background-color #f4f6f8
@@ -139,7 +139,7 @@ export default {
       margin-top 10px
       color #c4c8c7
       text-align center
-      .item-text
+      .tab-item__text
         font-weight bold
         font-size 16px
         padding 5px
@@ -149,7 +149,4 @@ export default {
         font-weight bold
         font-size 16px
 
-  .collect
-    width 100%
-    height 100%
 </style>

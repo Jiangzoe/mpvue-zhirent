@@ -1,19 +1,19 @@
 <template>
-  <div class="sponsor">
-    <div v-for="(item,index) in sponsors"  :key="index"  @click="toSponsorInfo(index)" class="card-container">
+  <div class="page">
+    <div v-for="(item,index) in sponsors"  :key="index"  @click="toSponsorInfo(index)" class="page-container">
       <div class="card-content">
         <div class="card-icon">
           <image class="icon" :src="item.avatar"></image>
         </div>
         <div class="card-info">
-          <div class="card-title">{{item.name}}</div>
-          <div class="card-desc">{{item.info}}</div>
+          <div class="card-info__title">{{item.name}}</div>
+          <div class="card-info__desc">{{item.info}}</div>
         </div>
         <button @click.stop="collect(index)" :class="collectList[index] ? 'like' : 'unlike'">{{collectList[index] ? '已关注' : '关注'}}</button>
       </div>
       <div class="card-footer">
-        <div class="card-salon-num">共举办{{item.salonNum}}场沙龙</div>
-        <div v-if="item.salonNum>0" class="card-recently">最近沙龙：{{item.salons[0].title}}</div>
+        <div class="salon-num">共举办{{item.salonNum}}场沙龙</div>
+        <div v-if="item.salonNum>0" class="recently-salon">最近沙龙：{{item.salons[0].title}}</div>
       </div>
     </div>
   </div>
@@ -93,11 +93,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.sponsor
+.page
   width 100%
   height 100%
   background-color #f4f6f8
-  .card-container
+  .page-container
     padding 15px
     background-color #fff
     border-bottom 1px solid #d4d8de
@@ -114,11 +114,11 @@ export default {
           border-radius 50%
       .card-info
         width 200px
-        .card-title
+        .card-info__title
           font-size 16px
           font-weight bold
           margin-bottom 10px
-        .card-desc
+        .card-info__desc
           font-size 14px
           overflow hidden
           text-overflow:ellipsis;
@@ -139,7 +139,7 @@ export default {
         background-color #fff
         color #224fa4
     .card-footer
-      .card-salon-num,.card-recently
+      .salon-num,.recently-salon
         margin-top 5px
         font-size 14px
         color #b6b9b5

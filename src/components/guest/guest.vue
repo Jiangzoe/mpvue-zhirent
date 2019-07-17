@@ -1,8 +1,8 @@
 <template>
-   <div class="salon-info">
-        <p class="info-item">{{guest.guestNum}}位嘉宾</p>
+   <div class="card-container">
+        <p class="card-title">{{guest.guestNum}}位嘉宾</p>
         <div class="guest-container" v-if="guest.guestNum>0">
-          <div class="guest-card" v-for="(item,index) in guest.guestInfo" :key="index">
+          <div class="guest-container__detail" v-for="(item,index) in guest.guestInfo" :key="index">
             <image class="guest-avatar" :src="item.photo"></image>
             <p class="guest-name">{{item.name}}</p>
             <p class="guest-info">{{item.company}},{{item.job}}</p>
@@ -31,9 +31,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.salon-info
+.card-container
   margin-bottom 30px
-  .info-item
+  .card-title
     color #43457a
     font-size 16px
     margin-bottom 10px
@@ -45,7 +45,7 @@ export default {
       margin 10px auto 0
       font-size 14px
       color #c4c8c7
-    .guest-card
+    .guest-container__detail
       width 164px
       height 120px
       border 1px solid #eaebed

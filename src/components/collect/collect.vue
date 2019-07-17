@@ -3,18 +3,18 @@
   <div class="collect-container" v-if="sponsors.length>0">
     <div v-for="(item,index) in sponsors" :key="index" >
       <div class="card-container" @click="go(index)">
-        <div class="card-content">
-          <div class="card-icon">
+        <div class="card-container__content">
+          <div class="content-icon">
             <image class="icon" :src="item.avatar"></image>
           </div>
-          <div class="card-info">
-            <div class="card-title">{{item.name}}</div>
-            <div class="card-desc">{{item.info}}</div>
+          <div class="card-container__info">
+            <div class="info-title">{{item.name}}</div>
+            <div class="info-desc">{{item.info}}</div>
           </div>
           <!-- <button @click.stop="collect(index)" :class="collectList[index] ? 'like' : 'unlike'">{{collectList[index] ? '已关注' : '关注'}}</button> -->
         </div>
         <div class="card-footer">
-          <div class="card-salon-num">共举办{{item.salonNum}}场沙龙</div>
+          <div class="salon-num">共举办{{item.salonNum}}场沙龙</div>
         </div>
       </div>
     </div>
@@ -54,23 +54,23 @@ export default {
     background-color #fff
     border-bottom 1px solid #d4d8de
     margin-bottom 10px
-    .card-content
+    .card-container__content
       display flex
       padding-bottom 15px
       border-bottom 1px dashed #d4d8de
-      .card-icon
+      .content-icon
         margin-right 5px
         .icon
           width 50px
           height 50px
           border-radius 50%
-      .card-info
+      .card-container__info
         width 200px
-        .card-title
+        .info-title
           font-size 16px
           font-weight bold
           margin-bottom 10px
-        .card-desc
+        .info-desc
           font-size 14px
           overflow hidden
           text-overflow:ellipsis;
@@ -91,7 +91,7 @@ export default {
         background-color #fff
         color #224fa4
     .card-footer
-      .card-salon-num
+      .salon-num
         margin-top 5px
         font-size 14px
         color #b6b9b5

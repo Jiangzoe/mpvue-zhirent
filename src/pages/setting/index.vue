@@ -1,15 +1,15 @@
 <template>
   <div class="page">
-    <div class="container">
-      <div class="item first" @click="goAbout">
-        <image class="icon" src="/static/images/about.svg"></image>
-        <text class="text">关于职人</text>
-        <image class="next" src="/static/images/next.svg"></image>
+    <div class="page-container">
+      <div class="page-container__item first" @click="goAbout">
+        <image class="item-icon" src="/static/images/about.svg"></image>
+        <text class="item-text">关于职人</text>
+        <image class="item-next" src="/static/images/next.svg"></image>
       </div>
-      <div class="item" @click="goCenter">
-        <image class="icon" src="/static/images/zhiren.png" ></image>
-        <text class="text">主办方中心</text>
-        <image class="next"  src="/static/images/next.svg"></image>
+      <div class="page-container__item" @click="goCenter">
+        <image class="item-icon" src="/static/images/zhiren.png" ></image>
+        <text class="item-text">主办方中心</text>
+        <image class="item-next"  src="/static/images/next.svg"></image>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@ export default {
   height 100vh
   background-color #f4f6f8
   padding 12px
-  .container
+  .page-container
     box-sizing border-box
     padding 15px
     background-color #fff
@@ -56,19 +56,19 @@ export default {
       border-bottom 1px dashed #d8dce1
       margin-bottom 15px
       padding-bottom 10px
-    .item
+    .page-container__item
       width 100%
       display flex
       position relative
-      .icon
+      .item-icon
         width 25px
         height 25px
         border-radius 50%
         margin-right 10px
-      .text
+      .item-text
         font-size 16px
         line-height 30px
-      .next
+      .item-next
         width 12px
         height 12px
         position absolute

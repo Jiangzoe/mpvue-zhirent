@@ -1,14 +1,14 @@
 <template>
-  <div class="sponsor">
-    <div class="sponsor-header">
-      <image class="sponsor-icon" :src="sponsor.avatar"></image>
-      <div class="sponsor-name">{{sponsor.name}}</div>
+  <div class="page">
+    <div class="page-header">
+      <image class="page-header__icon" :src="sponsor.avatar"></image>
+      <div class="page-header__name">{{sponsor.name}}</div>
       <Expander :info="sponsorInfo" ></Expander>
      <button @click="collect" :class="isCollected ? 'like' : 'unlike'">{{isCollected ? '已关注' : '关注'}}</button>
     </div>
     <div class="salon-num">主办{{sponsor.salonNum}}场沙龙</div>
     <div v-if="sponsor.salonNum>0">
-      <div class="content-container">
+      <div class="salon-container">
        <Salon :list="salonList" @go="goSalonDetail"></Salon>
       </div>
     </div>
@@ -127,22 +127,22 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.sponsor
+.page
   width: 100%
   height 100%
   min-height 100vh
   background-color #f4f6f8
-  .sponsor-header
+  .page-header
     background-color #fff
     padding 15px 20px 25px
     border-bottom 1px solid #eaebed
     text-align center
-    .sponsor-icon
+    .page-header__icon
       width 50px
       height 50px
       margin-bottom 10px
       border-radius 50%
-    .sponsor-name
+    .page-header__name
       font-size 16px
       font-weight bold
       margin-bottom 10px
@@ -167,6 +167,6 @@ export default {
     margin-left 15px
     font-weight bold
 
-.content-container
+.salon-container
   padding 0 10px
 </style>
